@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Clock, ExternalLink, MapPin } from "lucide-react";
 import type { SiteSettings } from "@/lib/settings-schema";
 import { displayPhone } from "@/lib/phone";
 import { waMeLink } from "@/lib/whatsapp";
@@ -56,20 +57,35 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
           <FooterLink href="/track">تتبّع طلبك</FooterLink>
           <FooterLink href="/policies">التوصيل والاستبدال</FooterLink>
         </FooterCol>
-        <FooterCol title="تواصلي معنا" className="md:col-span-3">
+        <FooterCol title="موقع المحل والدوام" className="md:col-span-3">
+          <a
+            href="https://www.google.com/maps?q=32.223977,35.2201582&z=17&hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mb-2 flex items-center gap-2 rounded-xl bg-ivory/10 p-2.5 text-xs text-ivory transition hover:bg-ivory/20"
+          >
+            <MapPin className="size-4 shrink-0 text-dusty" />
+            <span className="flex-1">موقع المحل على خرائط Google</span>
+            <ExternalLink className="size-3 opacity-60 transition group-hover:opacity-100" />
+          </a>
+
+          <div className="space-y-1.5 py-1 text-xs">
+            <div className="rounded-lg bg-ivory/5 p-2 border border-ivory/10">
+              <p className="font-semibold text-dusty">الأحد · الإثنين · الأربعاء:</p>
+              <p className="mt-0.5 text-ivory/80">من 3:00 عصراً حتى 8:00 مساءً</p>
+            </div>
+            <div className="rounded-lg bg-ivory/5 p-2 border border-ivory/10">
+              <p className="font-semibold text-dusty">باقي الأيام:</p>
+              <p className="mt-0.5 text-ivory/80">جميع الأوقات (خدمة متواصلة)</p>
+            </div>
+          </div>
+
           {b.whatsappNumber && (
-            <a href={waMeLink(b.whatsappNumber)} target="_blank" rel="noopener noreferrer" className="block py-1.5 text-ivory/80 transition hover:text-ivory">
+            <a href={waMeLink(b.whatsappNumber)} target="_blank" rel="noopener noreferrer" className="block py-1 text-xs text-ivory/80 transition hover:text-ivory">
               واتساب: <span className="latin inline-block">{displayPhone(b.whatsappNumber)}</span>
             </a>
           )}
-          {b.email && (
-            <a href={`mailto:${b.email}`} className="block py-1.5 text-ivory/80 hover:text-ivory">
-              {b.email}
-            </a>
-          )}
-          {b.address && <p className="py-1.5 text-ivory/80">{b.address}</p>}
-          {b.hours && <p className="py-1.5 text-ivory/80">{b.hours}</p>}
-          <p className="mt-3 inline-flex rounded-full border border-dusty/40 px-3 py-1.5 text-sm text-dusty">{settings.shipping.message}</p>
+          <p className="mt-2 inline-flex rounded-full border border-dusty/40 px-3 py-1 text-xs text-dusty">{settings.shipping.message}</p>
         </FooterCol>
       </div>
       <div className="border-t border-ivory/15 bg-burgundy/80">

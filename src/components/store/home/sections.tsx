@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Banknote, Gem, RefreshCcw, Truck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Banknote, Calendar, Clock, ExternalLink, Gem, MapPin, RefreshCcw, Sparkles, Truck } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -270,6 +270,141 @@ export function Testimonials({ items }: { items: { id: string; name: string; cit
               </figure>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ───────────── Boutique Location & Hours ───────────── */
+export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string }) {
+  const mapUrl = "https://www.google.com/maps?q=32.223977,35.2201582&z=17&hl=en";
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-blush/20 to-transparent py-16 md:py-24">
+      <div className="container-lux">
+        <Reveal className="text-center">
+          <SectionHeading eyebrow="Visit Our Boutique" title="موقع المحل وأوقات الدوام" />
+          <p className="mx-auto mt-2 max-w-xl text-sm text-muted sm:text-base">
+            نسعد بزيارتكِ وتجربة أحدث تشكيلات فيترينا بوتيك على أرض الواقع
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid gap-6 md:grid-cols-12 md:items-stretch">
+          {/* Working Hours Card */}
+          <Reveal delay={0.08} className="md:col-span-6">
+            <div className="flex h-full flex-col justify-between rounded-[28px] border border-line bg-white p-6 shadow-[var(--shadow-soft)] sm:p-8">
+              <div>
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-12 place-items-center rounded-2xl bg-blush text-burgundy">
+                      <Clock className="size-6" />
+                    </span>
+                    <div>
+                      <h3 className="text-xl font-bold text-burgundy">أوقات العمل والاستقبال</h3>
+                      <p className="text-xs text-muted">جدول استقبال الزبونات في المحل</p>
+                    </div>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">
+                    <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                    خدمة متواصلة
+                  </span>
+                </div>
+
+                <div className="mt-7 space-y-3.5">
+                  {/* Specific Days */}
+                  <div className="rounded-2xl border border-line/80 bg-blush/30 p-4 transition-colors hover:border-dusty">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="size-4 text-burgundy" />
+                        <span className="font-semibold text-burgundy">الأحد · الإثنين · الأربعاء</span>
+                      </div>
+                      <span className="rounded-full bg-burgundy px-3 py-1 text-xs font-bold text-ivory">
+                        3:00 عصراً – 8:00 مساءً
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-xs text-muted">
+                      الفترة المسائية المخصصة لاستقبال الزبونات وتجربة القطع والمقاسات
+                    </p>
+                  </div>
+
+                  {/* Other Days */}
+                  <div className="rounded-2xl border border-line/80 bg-ivory p-4 transition-colors hover:border-dusty">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="size-4 text-gold" />
+                        <span className="font-semibold text-burgundy">باقي الأيام (السبت، الثلاثاء، الخميس، الجمعة)</span>
+                      </div>
+                      <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-bold text-gold ring-1 ring-gold/30">
+                        جميع الأوقات
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-xs text-muted">
+                      متاح في جميع الأوقات واستقبال الاستفسارات والطلبات على مدار الساعة
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-line/60 pt-5">
+                <span className="text-xs text-muted">أهلاً وسهلاً بكِ في أي وقت</span>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-burgundy transition hover:text-mauve"
+                >
+                  <WhatsAppIcon className="size-4" />
+                  تأكيد موعد الزيارة عبر واتساب ←
+                </a>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Location & Map Card */}
+          <Reveal delay={0.16} className="md:col-span-6">
+            <div className="flex h-full flex-col justify-between rounded-[28px] border border-line bg-gradient-to-br from-white via-white to-blush/20 p-6 shadow-[var(--shadow-soft)] sm:p-8">
+              <div>
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-12 place-items-center rounded-2xl bg-burgundy text-ivory">
+                      <MapPin className="size-6" />
+                    </span>
+                    <div>
+                      <h3 className="text-xl font-bold text-burgundy">موقع المحل</h3>
+                      <p className="text-xs text-muted">فلسطين · إحداثيات: 32°13'26.3"N 35°13'12.6"E</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 overflow-hidden rounded-2xl border border-line bg-white shadow-inner">
+                  <div className="relative aspect-[16/9] w-full bg-blush">
+                    <iframe
+                      title="موقع فيترينا بوتيك على خرائط Google"
+                      src="https://maps.google.com/maps?q=32.223977,35.2201582&hl=ar&z=16&output=embed"
+                      width="100%"
+                      height="100%"
+                      loading="lazy"
+                      className="border-0"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                <span className="text-xs text-muted">انقري لفتح الموقع في تطبيق الخرائط</span>
+                <a
+                  href={mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ size: "md" })}
+                >
+                  <MapPin className="size-4" />
+                  فتح في خرائط Google
+                  <ExternalLink className="size-3.5 opacity-70" />
+                </a>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

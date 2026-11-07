@@ -77,8 +77,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     instagramUrl: "https://www.instagram.com/vetrina__boutique",
     facebookUrl: "https://www.facebook.com/share/1CFbD8EAG2/",
     email: "",
-    address: "فلسطين",
-    hours: "يومياً 10:00 – 22:00",
+    address: "فلسطين (32°13'26.3\"N 35°13'12.6\"E)",
+    hours: "أحد، اثنين، أربعاء: 3:00 عصراً – 8:00 مساءً | باقي الأيام: جميع الأوقات",
   },
   shipping: {
     fee: 0,

@@ -1,6 +1,7 @@
 import { Hero } from "@/components/store/home/hero";
 import {
   Benefits,
+  BoutiqueLocationSection,
   CategoryShowcase,
   CollectionsSection,
   MarqueeBand,
@@ -53,6 +54,7 @@ export default async function HomePage() {
       <CollectionsSection collections={collections} />
       <Benefits shippingMessage={settings.shipping.message} estimate={settings.shipping.estimate} />
       <Testimonials items={testimonials} />
+      <BoutiqueLocationSection whatsappHref={waMeLink(settings.business.whatsappNumber)} />
       <SocialBand instagramUrl={settings.business.instagramUrl} facebookUrl={settings.business.facebookUrl} whatsappHref={waMeLink(settings.business.whatsappNumber)} />
     </>
   );
