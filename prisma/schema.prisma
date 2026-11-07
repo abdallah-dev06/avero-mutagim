@@ -1,0 +1,462 @@
+// VETRINA BOUTIQUE — database schema
+// Money is stored as integer agorot (1 ILS = 100 agorot) to avoid float errors.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  STAFF
+  ADMIN
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  PROCESSING
+  READY
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH_ON_DELIVERY
+}
+
+enum OrderSource {
+  WEBSITE
+  MANUAL
+  WHATSAPP
+  INSTAGRAM
+}
+
+enum StockReason {
+  INITIAL
+  ORDER
+  CANCEL_RESTORE
+  RETURN_RESTORE
+  MANUAL
+  CORRECTION
+}
+
+enum OrderEventType {
+  CREATED
+  STATUS_CHANGE
+  PAYMENT_CHANGE
+  NOTE
+  WHATSAPP_DRAFT_OPENED
+  STOCK_RESTORED
+  FULFILLMENT_UPDATE
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  phone        String?
+  passwordHash String
+  role         Role      @default(CUSTOMER)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastLoginAt  DateTime?
+
+  sessions  Session[]
+  orders    Order[]     @relation("CustomerOrders")
+  shoppers  Shopper[]
+  auditLogs AuditLog[]
+}
+
+model Session {
+  id        String   @id // sha256 of the cookie token — raw token never stored
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  ip        String?
+  userAgent String?
+
+  @@index([userId])
+}
+
+model LoginAttempt {
+  id        String   @id @default(cuid())
+  key       String // "ip:<ip>" or "email:<email>"
+  success   Boolean
+  createdAt DateTime @default(now())
+
+  @@index([key, createdAt])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  data      Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([entity, entityId])
+}
+
+model SizeChart {
+  id             String         @id @default(cuid())
+  name           String
+  description    String? // e.g. "قياسات الجسم بالسنتيمتر"
+  measurementType String        @default("BODY") // BODY | GARMENT
+  isDefault      Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  rows           SizeChartRow[]
+  categories     Category[]
+  products       Product[]
+}
+
+model SizeChartRow {
+  id        String    @id @default(cuid())
+  chartId   String
+  chart     SizeChart @relation(fields: [chartId], references: [id], onDelete: Cascade)
+  label     String // XS, S, M ...
+  euSize    String? // 36, 38 ...
+  bustCm    Int?
+  waistCm   Int?
+  hipsCm    Int?
+  sortOrder Int       @default(0)
+
+  @@index([chartId, sortOrder])
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  name        String
+  nameEn      String?
+  description String?
+  imageUrl    String?
+  sortOrder   Int        @default(0)
+  isActive    Boolean    @default(true)
+  isFeatured  Boolean    @default(true)
+  sizeChartId String?
+  sizeChart   SizeChart? @relation(fields: [sizeChartId], references: [id], onDelete: SetNull)
+  products    Product[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Collection {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  nameEn      String?
+  description String?
+  imageUrl    String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id               String        @id @default(cuid())
+  slug             String        @unique
+  name             String
+  description      String        @default("")
+  careInstructions String?
+  categoryId       String?
+  category         Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  collections      Collection[]
+  price            Int // agorot
+  salePrice        Int? // agorot
+  status           ProductStatus @default(DRAFT)
+  isFeatured       Boolean       @default(false)
+  isBestSeller     Boolean       @default(false)
+  tags             String[]      @default([])
+  seoTitle         String?
+  seoDescription   String?
+  sizeChartId      String?
+  sizeChart        SizeChart?    @relation(fields: [sizeChartId], references: [id], onDelete: SetNull)
+  isDemo           Boolean       @default(false)
+  soldCount        Int           @default(0)
+  publishedAt      DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  images     ProductImage[]
+  colors     ProductColor[]
+  variants   ProductVariant[]
+  wishlisted WishlistItem[]
+
+  @@index([status, createdAt])
+  @@index([categoryId])
+}
+
+model ProductColor {
+  id        String           @id @default(cuid())
+  productId String
+  product   Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name      String
+  hex       String
+  sortOrder Int              @default(0)
+  images    ProductImage[]
+  variants  ProductVariant[]
+
+  @@index([productId])
+}
+
+model ProductImage {
+  id         String        @id @default(cuid())
+  productId  String
+  product    Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorId    String?
+  color      ProductColor? @relation(fields: [colorId], references: [id], onDelete: Cascade)
+  url        String
+  storageKey String?
+  alt        String?
+  width      Int?
+  height     Int?
+  sortOrder  Int           @default(0)
+  isCover    Boolean       @default(false)
+  createdAt  DateTime      @default(now())
+
+  @@index([productId, sortOrder])
+}
+
+model ProductVariant {
+  id                String          @id @default(cuid())
+  productId         String
+  product           Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorId           String
+  color             ProductColor    @relation(fields: [colorId], references: [id], onDelete: Cascade)
+  size              String
+  sku               String          @unique
+  stock             Int             @default(0)
+  priceAdjustment   Int             @default(0) // agorot, may be negative
+  lowStockThreshold Int?
+  isActive          Boolean         @default(true)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  cartItems         CartItem[]
+  orderItems        OrderItem[]
+  movements         StockMovement[]
+
+  @@unique([productId, colorId, size])
+  @@index([stock])
+}
+
+model StockMovement {
+  id        String         @id @default(cuid())
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  delta     Int
+  stockAfter Int
+  reason    StockReason
+  note      String?
+  orderId   String?
+  actorId   String?
+  createdAt DateTime       @default(now())
+
+  @@index([variantId, createdAt])
+}
+
+// Anonymous or signed-in shopper: owns the persistent cart and wishlist.
+model Shopper {
+  id        String         @id @default(cuid())
+  tokenHash String         @unique
+  userId    String?
+  user      User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  cartItems CartItem[]
+  wishlist  WishlistItem[]
+
+  @@index([userId])
+}
+
+model CartItem {
+  id        String         @id @default(cuid())
+  shopperId String
+  shopper   Shopper        @relation(fields: [shopperId], references: [id], onDelete: Cascade)
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  quantity  Int
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@unique([shopperId, variantId])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  shopperId String
+  shopper   Shopper  @relation(fields: [shopperId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([shopperId, productId])
+}
+
+model City {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  areas     Area[]
+  orders    Order[]
+}
+
+model Area {
+  id        String  @id @default(cuid())
+  cityId    String
+  city      City    @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  name      String
+  sortOrder Int     @default(0)
+  isActive  Boolean @default(true)
+
+  @@unique([cityId, name])
+}
+
+model Order {
+  id               String        @id @default(cuid())
+  reference        String        @unique // human readable, e.g. VB-7K3M9QX2
+  accessToken      String        @unique // unguessable secret used in the customer tracking link
+  idempotencyKey   String?       @unique
+  source           OrderSource   @default(WEBSITE)
+  customerId       String?
+  customer         User?         @relation("CustomerOrders", fields: [customerId], references: [id], onDelete: SetNull)
+  customerName     String
+  phone            String // E.164, e.g. +970599571202
+  cityId           String?
+  city             City?         @relation(fields: [cityId], references: [id], onDelete: SetNull)
+  cityName         String
+  areaName         String
+  addressLine      String
+  note             String?
+  subtotal         Int
+  shippingFee      Int           @default(0)
+  discount         Int           @default(0)
+  total            Int
+  itemCount        Int
+  paymentMethod    PaymentMethod @default(CASH_ON_DELIVERY)
+  paymentStatus    PaymentStatus @default(UNPAID)
+  status           OrderStatus   @default(NEW)
+  courierName      String?
+  trackingCode     String?
+  stockRestoredAt  DateTime?
+  whatsappOptIn    Boolean       @default(false) // consent for automated Cloud API updates
+  internalNote     String?
+  confirmedAt      DateTime?
+  deliveredAt      DateTime?
+  cancelledAt      DateTime?
+  createdById      String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  items    OrderItem[]
+  events   OrderEvent[]
+  messages WhatsAppMessage[]
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([phone])
+}
+
+model OrderItem {
+  id          String          @id @default(cuid())
+  orderId     String
+  order       Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variantId   String?
+  variant     ProductVariant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+  productId   String?
+  productName String
+  colorName   String
+  size        String
+  sku         String
+  imageUrl    String?
+  unitPrice   Int
+  quantity    Int
+  lineTotal   Int
+
+  @@index([orderId])
+  @@index([variantId])
+}
+
+model OrderEvent {
+  id         String         @id @default(cuid())
+  orderId    String
+  order      Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  type       OrderEventType
+  fromStatus OrderStatus?
+  toStatus   OrderStatus?
+  message    String?
+  isInternal Boolean        @default(true)
+  actorId    String?
+  actorName  String?
+  createdAt  DateTime       @default(now())
+
+  @@index([orderId, createdAt])
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model WhatsAppTemplate {
+  id        String       @id @default(cuid())
+  status    OrderStatus  @unique
+  body      String
+  updatedAt DateTime     @updatedAt
+}
+
+// Messages sent through the official WhatsApp Business Cloud API (only when configured).
+// Status is updated exclusively from Meta's signed delivery webhooks.
+model WhatsAppMessage {
+  id          String   @id @default(cuid())
+  orderId     String?
+  order       Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  toPhone     String
+  template    String
+  waMessageId String?  @unique
+  status      String   @default("ACCEPTED") // ACCEPTED | SENT | DELIVERED | READ | FAILED
+  error       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  city      String?
+  text      String
+  rating    Int      @default(5)
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}

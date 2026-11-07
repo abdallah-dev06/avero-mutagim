@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@theme {
+  --color-burgundy: #4b1f34;
+  --color-burgundy-900: #33131f;
+  --color-burgundy-800: #3f1a2b;
+  --color-mauve: #8b4b65;
+  --color-dusty: #d9a6b6;
+  --color-blush: #f7e8ec;
+  --color-ivory: #f9f6f4;
+  --color-ink: #2b1720;
+  --color-muted: #6c5561;
+  --color-line: #ead9de;
+  --color-gold: #b88a6a;
+  --color-success: #2f6b4f;
+  --color-danger: #a12a3f;
+
+  --font-sans: var(--font-tajawal), "Segoe UI", Tahoma, system-ui, sans-serif;
+  --font-display: var(--font-playfair), "Times New Roman", Georgia, serif;
+
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-soft: 0 1px 2px rgb(75 31 52 / 0.04), 0 8px 24px -12px rgb(75 31 52 / 0.18);
+  --shadow-lift: 0 2px 6px rgb(75 31 52 / 0.06), 0 24px 48px -24px rgb(75 31 52 / 0.35);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-spin-slow: spin 28s linear infinite;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+  }
+  @keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+}
+
+:root {
+  color-scheme: light;
+  --header-h: 64px;
+  --bottom-nav-h: 64px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection { background: var(--color-dusty); color: var(--color-burgundy-900); }
+
+:focus-visible {
+  outline: 2px solid var(--color-mauve);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Latin luxury wordmarks inside RTL text */
+.font-display { letter-spacing: 0.01em; }
+.latin { direction: ltr; unicode-bidi: isolate; }
+
+.container-lux {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 1320px;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) { .container-lux { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .container-lux { padding-inline: 2.5rem; } }
+
+.pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+.pt-safe { padding-top: env(safe-area-inset-top); }
+
+/* Space for the fixed mobile bottom nav so it never hides content */
+.store-main { padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + 8px); }
+@media (min-width: 1024px) { .store-main { padding-bottom: 0; } }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+.skeleton {
+  background: linear-gradient(90deg, #f1e4e8 0%, #f9f0f2 50%, #f1e4e8 100%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+.arch { border-radius: 999px 999px 18px 18px; }
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hairline { background: linear-gradient(90deg, transparent, var(--color-gold), transparent); height: 1px; }
+
+input[type="number"]::-webkit-inner-spin-button { opacity: 1; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+}
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes sheet-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes sheet-in-left { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes sheet-in-bottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes dialog-in { from { opacity: 0; transform: translate(-50%, -46%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+
+/* Hide Next.js dev indicator badge */
+[data-nextjs-dev-tools-button],
+nextjs-portal,
+#nextjs-dev-tools,
+div[data-nextjs-toast-wrapper],
+button[data-nextjs-dev-tools-button] {
+  display: none !important;
+}
