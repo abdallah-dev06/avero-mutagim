@@ -58,3 +58,22 @@ export function findSize(rows: ChartRow[], m: Measurements): FitResult {
   const largest = rows[rows.length - 1];
   return { kind: "too-large", largest, comparisons: compare(largest, m) };
 }
+
+/**
+ * Estimates female body measurements (bust, waist, hips) from height and weight.
+ * Calibrated against European/Mediterranean standard garment charts.
+ */
+export function estimateMeasurementsFromWeightAndHeight(weightKg: number, heightCm: number): { bust: number; waist: number; hips: number } {
+  const hM = heightCm / 100;
+  const bmi = weightKg / (hM * hM);
+
+  const waist = Math.round(72 + (weightKg - 60) * 0.95 + (bmi - 22) * 0.7);
+  const bust = Math.round(92 + (weightKg - 60) * 0.85 + (heightCm - 162) * 0.2);
+  const hips = Math.round(98 + (weightKg - 60) * 0.9 + (heightCm - 162) * 0.25);
+
+  return {
+    bust: Math.max(70, Math.min(160, bust)),
+    waist: Math.max(55, Math.min(150, waist)),
+    hips: Math.max(75, Math.min(170, hips)),
+  };
+}
