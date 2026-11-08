@@ -98,10 +98,9 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Instagram: @ay.dev06"
-                className="latin group inline-flex items-center gap-2 text-sm font-bold tracking-wide text-dusty transition-colors hover:text-gold sm:text-base"
+                className="latin text-sm font-bold tracking-wide text-dusty transition-colors hover:text-gold hover:underline sm:text-base"
               >
-                <InstagramIcon className="size-4 shrink-0 transition-transform group-hover:scale-110" />
-                <span className="hover:underline">Design & Development © 2026 | Abdallah Yaser</span>
+                Design & Development © 2026 | Abdallah Yaser
               </a>
 
               <a
