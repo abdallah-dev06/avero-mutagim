@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
 export function AnnouncementBar({
   messages,
@@ -12,6 +11,10 @@ export function AnnouncementBar({
 }) {
   if (!messages || !messages.length) return null;
 
+  // Clean empty messages
+  const cleanMessages = messages.filter((m) => m && m.trim().length > 0);
+  if (!cleanMessages.length) return null;
+
   // Duration in seconds based on speed setting
   const durationMap = {
     slow: "48s",
@@ -19,10 +22,6 @@ export function AnnouncementBar({
     fast: "20s",
   };
   const duration = durationMap[speed] || "32s";
-
-  // Clean empty messages
-  const cleanMessages = messages.filter((m) => m && m.trim().length > 0);
-  if (!cleanMessages.length) return null;
 
   // Repeat items inside each track half to guarantee zero gaps on large monitors (up to 4K 3840px)
   const trackItems = [...cleanMessages, ...cleanMessages];
@@ -69,14 +68,36 @@ export function AnnouncementBar({
       aria-label="شريط الإعلانات التسويقية"
       className="group relative z-40 w-full overflow-hidden border-b border-[#3b1728] bg-[#4B1F34] text-[#F9F6F4] select-none"
     >
+      {/* Self-contained, guaranteed keyframe animation style */}
+      <style>{`
+        @keyframes vb-marquee-flow {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-50%, 0, 0);
+          }
+        }
+        .vb-marquee-active {
+          display: flex !important;
+          width: max-content !important;
+          will-change: transform;
+          animation: vb-marquee-flow ${duration} linear infinite !important;
+        }
+        .vb-marquee-active:hover,
+        .vb-marquee-active:active {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+
       <div className="pt-safe" />
       <div className="relative flex h-9 sm:h-10 items-center overflow-hidden">
         {/* Infinite streaming marquee track (hardware accelerated translate3d) */}
         <div
           dir="ltr"
-          className="flex w-max items-center whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused] group-active:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:overflow-x-auto"
+          className="vb-marquee-track vb-marquee-active flex w-max items-center whitespace-nowrap"
           style={{
-            animation: `marquee-announcement ${duration} linear infinite`,
+            animation: `vb-marquee-flow ${duration} linear infinite`,
           }}
         >
           {/* Track 1: First complete set */}
