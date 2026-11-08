@@ -80,6 +80,15 @@ export function ProductView({
     return () => io.disconnect();
   }, []);
 
+  // Inform floating WhatsApp button if sticky mobile CTA is visible so it elevates safely
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(new CustomEvent("vb:sticky-bar", { detail: showSticky }));
+    return () => {
+      window.dispatchEvent(new CustomEvent("vb:sticky-bar", { detail: false }));
+    };
+  }, [showSticky]);
+
   // Broadcast current product and variant context to Floating WhatsApp Button
   React.useEffect(() => {
     if (typeof window === "undefined") return;

@@ -116,7 +116,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     enabled: true,
     speed: "normal",
     messages: [
-      "✦ تألّقي بأسلوبكِ الخاص مع VETRINA BOUTIQUE",
+      "● تألّقي بأسلوبكِ الخاص مع VETRINA BOUTIQUE",
       "إطلالات تخطف الأنظار... وتفاصيل تُحكى",
       "توصيل مجاني للضفة الغربية والقدس والداخل",
       "الدفع عند الاستلام",
