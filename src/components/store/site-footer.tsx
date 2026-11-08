@@ -54,6 +54,7 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
         </FooterCol>
         <FooterCol title="المساعدة" className="md:col-span-3">
           <FooterLink href="/about">قصتنا | Our Story</FooterLink>
+          <FooterLink href="/reviews">آراء زبوناتنا</FooterLink>
           <FooterLink href="/size-guide">دليل المقاسات</FooterLink>
           <FooterLink href="/track">تتبّع طلبك</FooterLink>
           <FooterLink href="/policies">التوصيل والاستبدال</FooterLink>

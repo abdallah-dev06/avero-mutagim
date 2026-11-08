@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { getCurrentUser, requestMeta } from "@/lib/auth";
 import { ensureShopper, findShopper } from "@/lib/shopper";
@@ -193,4 +194,35 @@ export async function trackOrder(raw: unknown): Promise<Result<{ redirectTo: str
   if (!order || order.phone !== phone) return { ok: false, error: "لم نجد طلباً بهذا الرقم ورقم الهاتف" };
   await rememberOrder(parsed.data.reference, order.accessToken);
   return { ok: true, redirectTo: `/order/${parsed.data.reference}?t=${encodeURIComponent(order.accessToken)}` };
+}
+
+const reviewInputSchema = z.object({
+  name: z.string().trim().min(2, "الاسم يجب أن يكون حرفين على الأقل").max(60, "الاسم طويل جداً"),
+  city: z.string().trim().max(60).optional(),
+  rating: z.number().int().min(1).max(5),
+  text: z.string().trim().min(5, "يرجى كتابة رأيكِ بما لا يقل عن 5 أحرف").max(600, "النص طويل جداً (الحد الأقصى 600 حرف)"),
+});
+
+export async function submitCustomerReview(raw: unknown): Promise<Result<{ id: string }>> {
+  try {
+    const { ip } = await requestMeta();
+    if (await hitLimit(`review:${ip}`, 5, 60 * 60 * 1000)) {
+      throw new DomainError("تم إرسال تقييم مسبقاً، شكراً لمشاركتكِ رأيكِ!");
+    }
+    const d = reviewInputSchema.parse(raw);
+    const item = await prisma.testimonial.create({
+      data: {
+        name: d.name,
+        city: d.city || null,
+        rating: d.rating,
+        text: d.text,
+        isActive: true,
+      },
+    });
+    refresh();
+    revalidatePath("/reviews");
+    return { ok: true, id: item.id };
+  } catch (e) {
+    return { ok: false, error: publicMessage(e) };
+  }
 }

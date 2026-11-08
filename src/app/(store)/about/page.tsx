@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle2, Feather, HeartHandshake, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Feather, HeartHandshake, ShieldCheck, Truck } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { getSettings } from "@/lib/settings";

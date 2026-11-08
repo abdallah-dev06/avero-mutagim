@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, Plus, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -39,20 +39,97 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
   return (
     <div className="space-y-5 pb-24">
       {!canEdit && <p className="rounded-xl bg-amber-50 p-3 text-sm text-amber-950">تعديل إعدادات الموقع متاح للمدير فقط.</p>}
-      <Card title="شريط الإعلانات">
-        <Switch label="إظهار الشريط" checked={s.announcement.enabled} onCheckedChange={(v) => set("announcement", { enabled: v })} />
-        <div className="mt-3 space-y-2">
+      <Card title="شريط الإعلانات المتحرك (Announcement Bar)">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Switch label="إظهار الشريط في أعلى الموقع" checked={s.announcement.enabled} onCheckedChange={(v) => set("announcement", { enabled: v })} />
+          <Field label="سرعة حركة الشريط المستمر" htmlFor="ann-speed">
+            <Select
+              id="ann-speed"
+              value={s.announcement.speed ?? "normal"}
+              onChange={(e) => set("announcement", { speed: e.target.value as "slow" | "normal" | "fast" })}
+            >
+              <option value="slow">هادئة وفاخرة (بطيئة ~45 ثانية)</option>
+              <option value="normal">انسيابية معتدلة (عادية ~32 ثانية)</option>
+              <option value="fast">حيوية وسريعة (~20 ثانية)</option>
+            </Select>
+          </Field>
+        </div>
+
+        <div className="mt-4 space-y-2.5">
+          <p className="text-xs font-semibold text-muted">العبارات التسويقية المعروضة (يمكن التعديل والترتيب والحذف):</p>
           {s.announcement.messages.map((m, i) => (
-            <div key={i} className="flex gap-2">
-              <Input value={m} onChange={(e) => set("announcement", { messages: s.announcement.messages.map((x, j) => (j === i ? e.target.value : x)) })} aria-label={`رسالة ${i + 1}`} />
-              <Button variant="ghost" size="icon" disabled={s.announcement.messages.length <= 1} onClick={() => set("announcement", { messages: s.announcement.messages.filter((_, j) => j !== i) })} aria-label="حذف">
-                <X />
-              </Button>
+            <div key={i} className="flex items-center gap-1.5 sm:gap-2">
+              <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-blush text-xs font-bold text-burgundy">
+                {i + 1}
+              </span>
+              <Input
+                value={m}
+                onChange={(e) =>
+                  set("announcement", {
+                    messages: s.announcement.messages.map((x, j) => (j === i ? e.target.value : x)),
+                  })
+                }
+                aria-label={`عبارة ${i + 1}`}
+                placeholder="اكتبي العبارة الإعلانية هنا…"
+                className="flex-1"
+              />
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="ghost"
+                  size="iconSm"
+                  disabled={i === 0}
+                  onClick={() => {
+                    const copy = [...s.announcement.messages];
+                    const [item] = copy.splice(i, 1);
+                    copy.splice(i - 1, 0, item);
+                    set("announcement", { messages: copy });
+                  }}
+                  title="تحريك لأعلى"
+                  aria-label="تحريك لأعلى"
+                >
+                  <ArrowUp className="size-3.5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="iconSm"
+                  disabled={i === s.announcement.messages.length - 1}
+                  onClick={() => {
+                    const copy = [...s.announcement.messages];
+                    const [item] = copy.splice(i, 1);
+                    copy.splice(i + 1, 0, item);
+                    set("announcement", { messages: copy });
+                  }}
+                  title="تحريك لأسفل"
+                  aria-label="تحريك لأسفل"
+                >
+                  <ArrowDown className="size-3.5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="iconSm"
+                  disabled={s.announcement.messages.length <= 1}
+                  onClick={() =>
+                    set("announcement", {
+                      messages: s.announcement.messages.filter((_, j) => j !== i),
+                    })
+                  }
+                  title="حذف العبارة"
+                  aria-label="حذف"
+                  className="text-danger hover:bg-rose-50"
+                >
+                  <X className="size-4" />
+                </Button>
+              </div>
             </div>
           ))}
-          {s.announcement.messages.length < 5 && (
-            <Button variant="soft" size="sm" onClick={() => set("announcement", { messages: [...s.announcement.messages, ""] })}>
-              <Plus /> رسالة
+          {s.announcement.messages.length < 12 && (
+            <Button
+              variant="soft"
+              size="sm"
+              onClick={() => set("announcement", { messages: [...s.announcement.messages, ""] })}
+              className="mt-2"
+            >
+              <Plus className="size-4" /> إضافة عبارة جديدة
             </Button>
           )}
         </div>

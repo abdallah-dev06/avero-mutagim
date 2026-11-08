@@ -15,7 +15,9 @@ export default async function StoreLayout({ children }: { children: React.ReactN
   const signedIn = !!user;
   return (
     <>
-      {settings.announcement.enabled && <AnnouncementBar messages={settings.announcement.messages} />}
+      {settings.announcement.enabled && (
+        <AnnouncementBar messages={settings.announcement.messages} speed={settings.announcement.speed} />
+      )}
       <SiteHeader
         categories={categories}
         cartCount={cart.count}

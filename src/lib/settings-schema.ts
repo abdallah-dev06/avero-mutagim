@@ -5,7 +5,8 @@ const link = z.object({ label: z.string().trim().min(1).max(40), href: z.string(
 export const siteSettingsSchema = z.object({
   announcement: z.object({
     enabled: z.boolean(),
-    messages: z.array(z.string().trim().min(1).max(120)).min(1).max(5),
+    speed: z.enum(["slow", "normal", "fast"]).default("normal"),
+    messages: z.array(z.string().trim().min(1).max(120)).min(1).max(12),
   }),
   hero: z.object({
     eyebrow: z.string().trim().max(60),
@@ -92,10 +93,13 @@ export type SiteSettings = z.infer<typeof siteSettingsSchema>;
 export const DEFAULT_SETTINGS: SiteSettings = {
   announcement: {
     enabled: true,
+    speed: "normal",
     messages: [
-      "توصيل مجاني للضفة والقدس · وللداخل بـ 30 ₪",
-      "الدفع عند الاستلام",
-      "تشكيلة جديدة كل أسبوع",
+      "تألّقي بأسلوبكِ الخاص مع VETRINA BOUTIQUE",
+      "إطلالات تخطف الأنظار... وتفاصيل تُحكى 🌸",
+      "توصيل مجاني للضفة الغربية والقدس والداخل.",
+      "الدفع عند الاستلام.",
+      "تشكيلة جديدة كل أسبوع.",
     ],
   },
   hero: {
