@@ -222,6 +222,19 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
         )}
       </div>
 
+      {/* ───────────── Bottom Brand Signature Quote ───────────── */}
+      <div className="mt-14 rounded-3xl border border-gold/30 bg-gradient-to-r from-blush/60 via-white to-blush/60 p-8 text-center shadow-sm">
+        <span className="latin font-display text-sm tracking-[0.3em] text-burgundy font-bold uppercase">
+          VETRINA BOUTIQUE
+        </span>
+        <p className="mt-2 text-lg sm:text-2xl font-bold text-burgundy">
+          ثقتكن فينا أجمل تفاصيل حكايتنا 💗
+        </p>
+        <p className="mt-2 text-xs sm:text-sm text-muted">
+          شكراً لكل زبونة تشاركنا فرحتها وأناقتها بقطع فيترينا المميزة
+        </p>
+      </div>
+
       {/* ───────────── Professional Review Modal Form ───────────── */}
       {modalOpen && (
         <div

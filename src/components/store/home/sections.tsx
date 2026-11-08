@@ -356,7 +356,15 @@ export function Testimonials({ items }: { items: { id: string; name: string; cit
     <section className="py-16 md:py-24">
       <div className="container-lux">
         <Reveal>
-          <SectionHeading eyebrow="Kind Words" title="آراء زبوناتنا" />
+          <SectionHeading
+            eyebrow="Kind Words"
+            title="آراء زبوناتنا المميزات 💗"
+            action={
+              <Link href="/reviews" className="group inline-flex items-center gap-1.5 text-sm font-bold text-burgundy">
+                كل الآراء <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+              </Link>
+            }
+          />
         </Reveal>
         <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0">
           {items.map((t, i) => (
@@ -382,6 +390,15 @@ export function Testimonials({ items }: { items: { id: string; name: string; cit
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.2} className="mt-10 text-center">
+          <p className="latin font-display text-xs tracking-[0.25em] text-mauve uppercase font-bold">
+            VETRINA BOUTIQUE
+          </p>
+          <p className="mt-1 text-sm sm:text-base font-semibold text-burgundy">
+            ثقتكن فينا أجمل تفاصيل حكايتنا 💗
+          </p>
+        </Reveal>
       </div>
     </section>
   );
