@@ -50,7 +50,7 @@ const SIZE_ROWS = [
 
 const CATEGORIES = [
   { slug: "abayas", name: "عبايات", nameEn: "Abayas", kind: "abaya", description: "عبايات بقصّات انسيابية وأقمشة مختارة." },
-  { slug: "blouses", name: "بلوزات", nameEn: "Blouses", kind: "blouse", description: "بلوزات ناعمة لإطلالات يومية وراقية." },
+  { slug: "blouses", name: "بلايز", nameEn: "Blouses", kind: "blouse", description: "بلايز ناعمة لإطلالات يومية وراقية." },
   { slug: "trousers", name: "بناطيل", nameEn: "Trousers", kind: "trousers", description: "بناطيل مريحة بقصّات عصرية." },
   { slug: "scarves", name: "شالات", nameEn: "Scarves", kind: "scarf", description: "شالات حرير وشيفون بألوان هادئة." },
   { slug: "sets", name: "أطقم", nameEn: "Sets", kind: "set", description: "أطقم متناسقة جاهزة لكل مناسبة." },

@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox, Field, Input, Select, Textarea } from "@/components/ui/form";
 import { formatILS } from "@/lib/money";
 import { checkoutSchema, type CheckoutInput } from "@/lib/validation";
+import { cn } from "@/lib/utils";
 import type { CartLine } from "@/server/cart";
 
 export function CheckoutForm({
@@ -19,14 +20,18 @@ export function CheckoutForm({
   lines,
   subtotal,
   shippingFee,
+  inside48Fee = 3000,
   shippingMessage,
+  inside48Message = "توصيل مناطق الداخل بـ 30 ₪ (نصف السعر)",
   defaults,
 }: {
   cities: { id: string; name: string }[];
   lines: CartLine[];
   subtotal: number;
   shippingFee: number;
+  inside48Fee?: number;
   shippingMessage: string;
+  inside48Message?: string;
   defaults?: { customerName?: string; phone?: string };
 }) {
   const router = useRouter();
@@ -51,6 +56,9 @@ export function CheckoutForm({
   });
 
   const cityId = useWatch({ control, name: "cityId" });
+  const selectedCity = cities.find((c) => c.id === cityId);
+  const isInside48 = Boolean(selectedCity?.name?.includes("الداخل"));
+  const currentShippingFee = isInside48 ? inside48Fee : shippingFee;
   const loadAreas = (id: string) => {
     setValue("areaName", "");
     setAreas([]);
@@ -193,15 +201,24 @@ export function CheckoutForm({
           </div>
           <div className="flex justify-between">
             <dt className="text-muted">التوصيل</dt>
-            <dd className="font-medium text-success">{shippingFee === 0 ? "مجاني — 0 ₪" : <span className="latin">{formatILS(shippingFee)}</span>}</dd>
+            <dd className={cn("font-medium", currentShippingFee === 0 ? "text-success" : "text-burgundy")}>
+              {currentShippingFee === 0 ? (
+                "مجاني — 0 ₪"
+              ) : (
+                <span className="latin flex items-center gap-1.5">
+                  {formatILS(currentShippingFee)}
+                  {isInside48 && <span className="text-xs text-muted font-normal">(الداخل المحتل)</span>}
+                </span>
+              )}
+            </dd>
           </div>
           <div className="flex justify-between border-t border-line pt-3 text-base">
             <dt className="font-medium">الإجمالي (عند الاستلام)</dt>
-            <dd className="latin text-lg font-bold text-burgundy">{formatILS(subtotal + shippingFee)}</dd>
+            <dd className="latin text-lg font-bold text-burgundy">{formatILS(subtotal + currentShippingFee)}</dd>
           </div>
         </dl>
         <p className="mt-4 flex items-center gap-2 text-xs text-muted">
-          <Truck className="size-4 shrink-0" /> {shippingMessage}
+          <Truck className="size-4 shrink-0 text-gold" /> {isInside48 ? inside48Message : shippingMessage}
         </p>
         {serverError && (
           <p role="alert" className="mt-4 rounded-xl bg-rose-50 p-3 text-sm text-danger">

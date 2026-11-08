@@ -58,6 +58,7 @@ export function SiteHeader({
             <SheetContent side="right" title="القائمة">
               <nav className="flex flex-col px-5 py-4" aria-label="القائمة الرئيسية" onClick={(e) => (e.target as HTMLElement).closest("a") && setMenuOpen(false)}>
                 <MobileLink href="/">الرئيسية</MobileLink>
+                <MobileLink href="/about">قصتنا | Our Story</MobileLink>
                 <MobileLink href="/shop?sort=new">وصل حديثاً</MobileLink>
                 <MobileLink href="/shop">كل المنتجات</MobileLink>
                 <p className="mt-5 mb-1 text-xs font-medium tracking-wide text-muted">الأقسام</p>
@@ -95,6 +96,9 @@ export function SiteHeader({
           ))}
           <DesktopLink href="/size-guide" active={pathname === "/size-guide"}>
             دليل المقاسات
+          </DesktopLink>
+          <DesktopLink href="/about" active={pathname === "/about"}>
+            قصتنا
           </DesktopLink>
         </nav>
 
@@ -197,7 +201,7 @@ export function SearchButton({ variant = "icon" }: { variant?: "icon" | "nav" })
             <D.Close className="shrink-0 rounded-full px-3 py-2 text-sm text-muted hover:bg-blush">إلغاء</D.Close>
           </form>
           <div className="mx-auto mt-5 flex max-w-2xl flex-wrap gap-2">
-            {["عبايات", "بلوزات", "شالات", "أطقم", "أسود", "بيج"].map((t) => (
+            {["عبايات", "بلايز", "شالات", "أطقم", "أسود", "بيج"].map((t) => (
               <button
                 key={t}
                 type="button"

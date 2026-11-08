@@ -14,9 +14,9 @@ export const TEMPLATE_PLACEHOLDERS = [
 ] as const;
 
 export const DEFAULT_WHATSAPP_TEMPLATES: Record<OrderStatus, string> = {
-  NEW: "مرحباً {name} 🌸\nشكراً لطلبك من {store}.\nرقم الطلب: {reference}\nالمجموع: {total} (توصيل مجاني)\n\nالقطع:\n{items}\n\nسنتواصل معك قريباً لتأكيد الطلب.",
+  NEW: "مرحباً {name} 🌸\nشكراً لطلبك من {store}.\nرقم الطلب: {reference}\nالمجموع: {total} — الدفع عند الاستلام\n\nالقطع:\n{items}\n\nسنتواصل معك قريباً لتأكيد الطلب.",
   CONFIRMED: "مرحباً {name} 🤍\nتم تأكيد طلبك رقم {reference} بنجاح.\nالمجموع: {total} — الدفع عند الاستلام.\nيمكنك متابعة طلبك من هنا:\n{tracking_link}",
-  PROCESSING: "مرحباً {name}،\nطلبك رقم {reference} قيد التجهيز الآن ✨\nنحرص على تغليف قطعك بعناية.\n{tracking_link}",
+  PROCESSING: "مرحباً {name}،\nطلبك رقم {reference} قيد التجهيز الآن 🌸\nنحرص على تغليف قطعك بعناية.\n{tracking_link}",
   READY: "مرحباً {name}،\nطلبك رقم {reference} جاهز وسيُسلَّم لشركة التوصيل قريباً 📦\n{tracking_link}",
   OUT_FOR_DELIVERY: "مرحباً {name} 🚚\nطلبك رقم {reference} في الطريق إليك.\nيرجى تجهيز مبلغ {total} عند الاستلام.\n{tracking_link}",
   DELIVERED: "مرحباً {name} 💐\nتم تسليم طلبك رقم {reference}. نتمنى أن تنال القطع إعجابك!\nيسعدنا رأيك وصورك بالقطع على إنستغرام.\nشكراً لاختيارك {store}.",

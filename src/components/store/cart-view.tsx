@@ -31,16 +31,16 @@ export function CartView({ lines, subtotal, shippingFee, shippingMessage, hasIss
           </div>
           <div className="flex justify-between">
             <dt className="text-muted">التوصيل</dt>
-            <dd className="font-medium text-success">{shippingFee === 0 ? "مجاني — 0 ₪" : <span className="latin">{formatILS(shippingFee)}</span>}</dd>
+            <dd className="font-medium text-success">{shippingFee === 0 ? "مجاني (للضفة والقدس)" : <span className="latin">{formatILS(shippingFee)}</span>}</dd>
           </div>
           <div className="hairline !my-4" />
           <div className="flex justify-between text-base">
-            <dt className="font-medium">الإجمالي</dt>
+            <dt className="font-medium">الإجمالي التقريبي</dt>
             <dd className="latin text-lg font-bold text-burgundy">{formatILS(subtotal + shippingFee)}</dd>
           </div>
         </dl>
-        <p className="mt-4 flex items-center gap-2 rounded-xl bg-blush px-3 py-2.5 text-xs text-burgundy">
-          <Truck className="size-4 shrink-0" /> {shippingMessage} · الدفع عند الاستلام
+        <p className="mt-4 flex items-center gap-2 rounded-xl border border-gold/20 bg-blush px-3.5 py-2.5 text-xs text-burgundy">
+          <Truck className="size-4 shrink-0 text-gold" /> {shippingMessage}
         </p>
         {hasIssues && (
           <p role="alert" className="mt-3 flex items-start gap-2 text-sm text-danger">

@@ -49,12 +49,22 @@ export default async function HomePage() {
       <MarqueeBand items={[...settings.announcement.messages, "VETRINA BOUTIQUE"]} />
       <CategoryShowcase categories={categories.filter((c) => c.isFeatured)} />
       <ProductShowcaseGrid eyebrow="New Arrivals" title="وصل حديثاً" href="/shop?sort=new" products={newArrivals} wishlistIds={cart.wishlistIds} />
-      <StorySection title={h.storyTitle} text={h.storyText} />
+      {h.showStory !== false && (settings.story?.enabled ?? true) && (
+        <StorySection
+          title={settings.story?.title || h.storyTitle}
+          text={settings.story?.homeIntro || h.storyText}
+          eyebrow={settings.story?.eyebrow || "OUR STORY"}
+          imageUrl={settings.story?.imageUrl}
+          imageAlt={settings.story?.imageAlt}
+        />
+      )}
       <ProductRail eyebrow="Best Sellers" title="الأكثر طلباً" href="/shop?sort=best" products={bestSellers} wishlistIds={cart.wishlistIds} />
       <CollectionsSection collections={collections} />
       <Benefits shippingMessage={settings.shipping.message} estimate={settings.shipping.estimate} />
       <Testimonials items={testimonials} />
-      <BoutiqueLocationSection whatsappHref={waMeLink(settings.business.whatsappNumber)} />
+      {h.showLocation !== false && (
+        <BoutiqueLocationSection whatsappHref={waMeLink(settings.business.whatsappNumber)} />
+      )}
       <SocialBand instagramUrl={settings.business.instagramUrl} facebookUrl={settings.business.facebookUrl} whatsappHref={waMeLink(settings.business.whatsappNumber)} />
     </>
   );

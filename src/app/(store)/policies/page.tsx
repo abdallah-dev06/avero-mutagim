@@ -12,10 +12,24 @@ export default async function PoliciesPage() {
       <div className="mt-10 space-y-6">
         <section className="rounded-2xl border border-line bg-white p-6">
           <h2 className="text-xl font-medium text-burgundy">التوصيل</h2>
-          <p className="mt-3 leading-[1.9]">
-            {s.shipping.message}. رسوم التوصيل: <span className="latin inline-block">{formatILS(s.shipping.fee)}</span>.
+          <p className="mt-3 leading-[1.9] font-medium text-ink">
+            {s.shipping.message}
           </p>
-          <p className="mt-2 leading-[1.9] text-muted">{s.shipping.estimate}.</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <div className="rounded-xl border border-line bg-ivory/60 p-3.5">
+              <span className="block text-xs font-bold text-burgundy">الضفة الغربية والقدس</span>
+              <p className="mt-1 text-sm font-semibold text-emerald-700">
+                {s.shipping.fee === 0 ? "توصيل مجاني (0 ₪)" : formatILS(s.shipping.fee)}
+              </p>
+            </div>
+            <div className="rounded-xl border border-line bg-ivory/60 p-3.5">
+              <span className="block text-xs font-bold text-burgundy">مناطق الداخل المحتل (48)</span>
+              <p className="mt-1 text-sm font-semibold text-burgundy">
+                {formatILS(s.shipping.inside48Fee ?? 3000)} (بنصف السعر)
+              </p>
+            </div>
+          </div>
+          <p className="mt-3 leading-[1.9] text-sm text-muted">{s.shipping.estimate}.</p>
         </section>
         <section className="rounded-2xl border border-line bg-white p-6">
           <h2 className="text-xl font-medium text-burgundy">الدفع</h2>

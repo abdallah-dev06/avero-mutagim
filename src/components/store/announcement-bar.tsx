@@ -31,9 +31,9 @@ export function AnnouncementBar({ messages }: { messages: string[] }) {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="flex items-center gap-2 truncate"
           >
-            <span aria-hidden className="text-dusty">✦</span>
+            <span aria-hidden className="inline-block size-1.5 rounded-full bg-gold/90" />
             {messages[i]}
-            <span aria-hidden className="text-dusty">✦</span>
+            <span aria-hidden className="inline-block size-1.5 rounded-full bg-gold/90" />
           </motion.p>
         </AnimatePresence>
       </div>

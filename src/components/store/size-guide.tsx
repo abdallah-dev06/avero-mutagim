@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, ChevronDown, Info, Ruler, Search, Sparkles } from "lucide-react";
+import { CheckCircle2, ChevronDown, Info, Ruler, Search } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
@@ -250,16 +250,16 @@ export function SizeFinder({
         )}
       </div>
 
-      {/* Action Button: احسبي مقاسي ✨ */}
+      {/* Action Button: احسبي مقاسي */}
       <div className="relative mt-8">
         <button
           type="button"
           onClick={calculate}
-          className="group relative flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#f3e5ab] via-[#e2b755] to-[#c5952f] py-4 px-6 text-base font-bold text-burgundy-950 shadow-[0_6px_25px_rgba(212,175,55,0.35)] transition-all hover:brightness-105 active:scale-[0.99] sm:text-lg"
+          className="group relative flex w-full items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#f3e5ab] via-[#e2b755] to-[#c5952f] py-4 px-6 text-base font-bold text-burgundy-950 shadow-[0_6px_25px_rgba(212,175,55,0.35)] transition-all hover:brightness-105 active:scale-[0.99] sm:text-lg"
         >
-          <Sparkles className="size-5 transition-transform group-hover:rotate-12" />
+          <span className="size-2 rounded-full bg-burgundy-950/70 transition-transform group-hover:scale-125" />
           <span>احسبي مقاسي</span>
-          <Sparkles className="size-5 transition-transform group-hover:-rotate-12" />
+          <span className="size-2 rounded-full bg-burgundy-950/70 transition-transform group-hover:scale-125" />
         </button>
       </div>
 
@@ -390,7 +390,7 @@ function FitMessage({ result, availableSizes }: { result: FitResult; availableSi
 
       {result.between && (
         <p className="mt-2 text-xs text-dusty">
-          ✨ لاحظنا تفاوتاً لطيفاً في قياساتك، إذا كنتِ تفضلين إطلالة ضيقة ومحددة قد يناسبك المقاس الأصغر في بعض القصّات.
+          ● لاحظنا تفاوتاً لطيفاً في قياساتك، إذا كنتِ تفضلين إطلالة ضيقة ومحددة قد يناسبك المقاس الأصغر في بعض القصّات.
         </p>
       )}
 

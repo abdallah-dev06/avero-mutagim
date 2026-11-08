@@ -32,7 +32,9 @@ export default async function CheckoutPage() {
           lines={cart.lines}
           subtotal={cart.subtotal}
           shippingFee={settings.shipping.fee}
+          inside48Fee={settings.shipping.inside48Fee ?? 3000}
           shippingMessage={settings.shipping.message}
+          inside48Message={settings.shipping.inside48Message ?? "توصيل مناطق الداخل بـ 30 ₪ (نصف السعر)"}
           defaults={account ? { customerName: account.name, phone: account.phone ? displayPhone(account.phone) : "" } : undefined}
         />
       ) : (

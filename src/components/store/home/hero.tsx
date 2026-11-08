@@ -61,7 +61,7 @@ function Emblem({ size }: { size: string }) {
         <circle cx="150" cy="150" r="146" fill="none" stroke="#B88A6A" strokeOpacity=".55" strokeWidth="1" />
         <circle cx="150" cy="150" r="112" fill="none" stroke="#B88A6A" strokeOpacity=".35" strokeWidth=".8" />
         <text fill="#8B4B65" fontSize="12.5" letterSpacing="6.2" style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}>
-          <textPath href="#ring">VETRINA ✦ BOUTIQUE ✦ PALESTINE ✦ VETRINA ✦ BOUTIQUE ✦ PALESTINE ✦</textPath>
+          <textPath href="#ring">VETRINA • BOUTIQUE • PALESTINE • VETRINA • BOUTIQUE • PALESTINE •</textPath>
         </text>
       </svg>
       <motion.div

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
   title: { default: "VETRINA BOUTIQUE | فيترينا بوتيك", template: "%s | VETRINA BOUTIQUE" },
   description:
-    "متجر أزياء نسائية راقية في فلسطين: عبايات، بلوزات، بناطيل، شالات وأطقم. توصيل مجاني لجميع أنحاء فلسطين والدفع عند الاستلام.",
+    "متجر أزياء نسائية راقية في فلسطين: عبايات، بلايز، بناطيل، شالات وأطقم. توصيل مجاني للضفة والقدس وللداخل بـ 30 ₪ والدفع عند الاستلام.",
   applicationName: "VETRINA BOUTIQUE",
   openGraph: {
     type: "website",

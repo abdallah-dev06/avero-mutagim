@@ -124,8 +124,8 @@ export function ProductView({
         )}
         <h1 className="mt-1 text-[1.75rem] font-medium leading-tight text-burgundy md:text-4xl">{product.name}</h1>
         <Price price={product.price} salePrice={product.salePrice} adjustment={variant?.priceAdjustment ?? 0} size="lg" className="mt-3" />
-        <p className="mt-2 flex items-center gap-2 text-sm text-success">
-          <Truck className="size-4" aria-hidden /> {shippingMessage} — رسوم التوصيل 0 ₪
+        <p className="mt-2 flex items-center gap-2 text-sm text-burgundy">
+          <Truck className="size-4 text-gold shrink-0" aria-hidden /> {shippingMessage}
         </p>
 
         {/* Colour */}

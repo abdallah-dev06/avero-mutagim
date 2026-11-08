@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Banknote, Calendar, Clock, ExternalLink, Gem, MapPin, RefreshCcw, Sparkles, Truck } from "lucide-react";
+import { ArrowLeft, ArrowRight, Banknote, Calendar, Clock, ExternalLink, Gem, MapPin, RefreshCcw, Truck } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +22,7 @@ export function MarqueeBand({ items }: { items: string[] }) {
         {[...row, ...row].map((t, i) => (
           <span key={i} className="flex items-center gap-10 text-sm tracking-wide text-burgundy/80 md:text-base">
             {t}
-            <span className="text-gold">✦</span>
+            <span className="inline-block size-1.5 rounded-full bg-gold/90 shadow-[0_0_8px_rgba(212,175,55,0.4)]" />
           </span>
         ))}
       </div>
@@ -142,37 +142,148 @@ export function ProductShowcaseGrid({ eyebrow, title, href, products, wishlistId
   );
 }
 
-/* ───────────── Story (scroll-linked) ───────────── */
-export function StorySection({ title, text }: { title: string; text: string }) {
+/* ───────────── Story (Editorial Luxury Preview) ───────────── */
+export function StorySection({
+  title = "حكاية أناقة تبدأ بكِ",
+  text = "في VETRINA BOUTIQUE، نؤمن أن الأناقة ليست مجرد ملابس نرتديها، بل أسلوب يعبّر عن شخصيتنا وثقة ترافقنا في كل خطوة. نختار لكِ تصاميم تجمع بين الرقي والبساطة والراحة، لتجدي ما يشبه ذوقكِ ويعبّر عنكِ.",
+  eyebrow = "OUR STORY",
+  imageUrl = null,
+  imageAlt = "VETRINA BOUTIQUE",
+}: {
+  title?: string;
+  text?: string;
+  eyebrow?: string;
+  imageUrl?: string | null;
+  imageAlt?: string;
+}) {
   const ref = React.useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const spacing = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? ["0.15em", "0.15em", "0.15em"] : ["0.6em", "0.12em", "0.3em"]);
-  const x = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["8%", "-8%"]);
-  const ringRotate = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [30, -30]);
+  const ringRotate = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
+
+  const displayImage = imageUrl || "/demo/abaya-burgundy-1.webp";
+
   return (
-    <section ref={ref} className="relative overflow-hidden bg-burgundy py-20 text-ivory md:py-32">
-      <motion.div aria-hidden style={{ rotate: ringRotate }} className="pointer-events-none absolute -left-40 top-1/2 size-[34rem] -translate-y-1/2 rounded-full border border-gold/25 md:size-[44rem]">
-        <span className="absolute left-1/2 top-0 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/70" />
-      </motion.div>
-      <motion.p
+    <section
+      ref={ref}
+      aria-labelledby="story-heading"
+      className="relative overflow-hidden bg-gradient-to-b from-[#2a111e] via-[#331322] to-[#240d18] py-20 text-ivory md:py-32"
+    >
+      {/* Decorative Golden Concentric Rings */}
+      <motion.div
         aria-hidden
-        style={{ letterSpacing: spacing, x }}
-        className="latin pointer-events-none select-none whitespace-nowrap text-center font-display text-[18vw] font-medium leading-none text-ivory/[0.07] md:text-[13vw]"
+        style={{ rotate: ringRotate }}
+        className="pointer-events-none absolute -left-36 top-1/2 size-[32rem] -translate-y-1/2 rounded-full border border-gold/20 md:size-[46rem]"
       >
-        VETRINA
-      </motion.p>
-      <div className="container-lux relative -mt-[8vw] grid gap-10 md:grid-cols-12">
-        <Reveal className="md:col-span-5 md:col-start-2">
-          <p className="latin font-display text-sm uppercase tracking-[0.4em] text-dusty">Our Story</p>
-          <h2 className="mt-3 text-3xl font-medium leading-tight md:text-5xl">{title}</h2>
-        </Reveal>
-        <Reveal delay={0.15} className="md:col-span-5">
-          <p className="text-lg leading-[2] text-ivory/80">{text}</p>
-          <Link href="/shop" className={cn(buttonVariants({ variant: "secondary" }), "mt-8 border-ivory/30 bg-transparent text-ivory hover:border-ivory hover:bg-ivory hover:text-burgundy")}>
-            اكتشفي المجموعة
-          </Link>
-        </Reveal>
+        <span className="absolute left-1/2 top-0 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/80 shadow-[0_0_12px_rgba(212,175,55,0.6)]" />
+      </motion.div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 bottom-10 size-72 rounded-full bg-mauve/10 blur-3xl"
+      />
+
+      <div className="container-lux relative">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Editorial Visual Column */}
+          <Reveal className="order-2 lg:order-1 lg:col-span-5">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
+              {/* Outer arch frame with golden stroke */}
+              <div className="arch relative aspect-[3/4] overflow-hidden rounded-t-[120px] rounded-b-[32px] border border-gold/30 bg-blush/20 shadow-[0_20px_50px_rgba(0,0,0,0.45)] ring-1 ring-white/10 sm:rounded-t-[140px]">
+                <motion.div style={{ y: yParallax }} className="relative h-[115%] w-full -top-[7%]">
+                  <Image
+                    src={displayImage}
+                    alt={imageAlt || title}
+                    fill
+                    sizes="(min-width: 1024px) 38vw, 85vw"
+                    className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-lux)] hover:scale-105"
+                  />
+                </motion.div>
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#240d18]/80 via-transparent to-transparent"
+                />
+
+                {/* Subtle Floating Label */}
+                <div className="absolute bottom-5 inset-x-5 flex items-center justify-between rounded-2xl border border-white/15 bg-black/40 px-4 py-2.5 backdrop-blur-md">
+                  <span className="latin font-display text-xs uppercase tracking-[0.25em] text-ivory">
+                    Vetrina Boutique
+                  </span>
+                  <span className="inline-block size-1.5 rounded-full bg-gold/90" />
+                  <span className="text-[11px] text-dusty">إصدارات مختارة</span>
+                </div>
+              </div>
+
+              {/* Decorative side accent lines */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -bottom-4 -right-4 size-28 rounded-3xl border border-gold/25 -z-10"
+              />
+            </div>
+          </Reveal>
+
+          {/* Narrative Column */}
+          <Reveal delay={0.12} className="order-1 lg:order-2 lg:col-span-7">
+            <div className="max-w-xl text-start">
+              {/* Eyebrow */}
+              <div className="flex items-center gap-2.5">
+                <span className="size-2 rounded-full bg-gold/90 shadow-[0_0_8px_rgba(212,175,55,0.5)]" />
+                <p className="latin font-display text-xs uppercase tracking-[0.35em] text-dusty">
+                  {eyebrow}
+                </p>
+                <span className="h-px w-10 bg-gold/30" />
+              </div>
+
+              {/* Main Heading */}
+              <h2
+                id="story-heading"
+                className="mt-4 text-3xl font-medium leading-[1.25] tracking-tight text-ivory sm:text-4xl lg:text-5xl"
+              >
+                {title}
+              </h2>
+
+              <p className="mt-3 text-sm font-semibold tracking-wide text-dusty sm:text-base">
+                لأن الأناقة تبدأ من التفاصيل...
+              </p>
+
+              {/* Emotional Introduction */}
+              <p className="mt-6 text-base leading-[2.1] text-ivory/85 sm:text-lg sm:leading-[2.2]">
+                {text}
+              </p>
+
+              {/* Minimal Brand Highlights */}
+              <div className="mt-8 grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
+                <div>
+                  <span className="block text-xs font-semibold text-dusty">فخامة هادئة</span>
+                  <p className="mt-1 text-xs text-ivory/70">قصّات مريحة تدوم أكثر من موسم</p>
+                </div>
+                <div>
+                  <span className="block text-xs font-semibold text-dusty">عناية بكل قطعة</span>
+                  <p className="mt-1 text-xs text-ivory/70">أقمشة مختارة وفحص يدوي دقيق</p>
+                </div>
+              </div>
+
+              {/* CTA button to /about */}
+              <div className="mt-9 flex flex-wrap items-center gap-4">
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-gradient-to-r from-gold/15 via-gold/10 to-transparent px-7 py-3.5 text-sm font-bold text-ivory shadow-[0_4px_20px_rgba(212,175,55,0.15)] transition-all hover:border-gold hover:bg-gold hover:text-burgundy-950 active:scale-[0.98]"
+                >
+                  <span>اكتشفي حكايتنا</span>
+                  <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
+                </Link>
+
+                <Link
+                  href="/shop"
+                  className="inline-flex items-center gap-2 text-sm text-ivory/70 transition-colors hover:text-ivory"
+                >
+                  <span>تصفّحي الكتالوج</span>
+                  <span className="text-xs text-dusty">←</span>
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -331,7 +442,7 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
                   <div className="rounded-2xl border border-line/80 bg-ivory p-4 transition-colors hover:border-dusty">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <Sparkles className="size-4 text-gold" />
+                        <span className="inline-block size-2 rounded-full bg-gold shadow-[0_0_6px_rgba(212,175,55,0.6)]" />
                         <span className="font-semibold text-burgundy">باقي الأيام (السبت، الثلاثاء، الخميس، الجمعة)</span>
                       </div>
                       <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-bold text-gold ring-1 ring-gold/30">

@@ -16,12 +16,20 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
   const router = useRouter();
   const [s, setS] = React.useState(initial);
   const [fee, setFee] = React.useState(String(initial.shipping.fee / 100));
+  const [insideFee, setInsideFee] = React.useState(String((initial.shipping.inside48Fee ?? 3000) / 100));
   const [pending, start] = React.useTransition();
   const set = <K extends keyof SiteSettings>(k: K, patch: Partial<SiteSettings[K]>) => setS((x) => ({ ...x, [k]: { ...x[k], ...patch } }));
 
   const save = () =>
     start(async () => {
-      const res = await saveSiteSettings({ ...s, shipping: { ...s.shipping, fee: Math.round((Number(fee) || 0) * 100) } });
+      const res = await saveSiteSettings({
+        ...s,
+        shipping: {
+          ...s.shipping,
+          fee: Math.round((Number(fee) || 0) * 100),
+          inside48Fee: Math.round((Number(insideFee) || 30) * 100),
+        },
+      });
       if (res.ok) {
         toast.success("تم حفظ الإعدادات وتحديث المتجر");
         router.refresh();
@@ -100,20 +108,62 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
         </div>
       </Card>
 
-      <Card title="أقسام الصفحة الرئيسية">
-        <div className="grid gap-1 sm:grid-cols-2">
+      <Card title="أقسام الصفحة الرئيسية والتحكم بالعرض">
+        <div className="grid gap-2 sm:grid-cols-2">
           <Switch label="وصل حديثاً" checked={s.homepage.showNewArrivals} onCheckedChange={(v) => set("homepage", { showNewArrivals: v })} />
           <Switch label="الأكثر طلباً" checked={s.homepage.showBestSellers} onCheckedChange={(v) => set("homepage", { showBestSellers: v })} />
           <Switch label="المجموعات" checked={s.homepage.showCollections} onCheckedChange={(v) => set("homepage", { showCollections: v })} />
           <Switch label="آراء الزبونات (إن وُجدت)" checked={s.homepage.showTestimonials} onCheckedChange={(v) => set("homepage", { showTestimonials: v })} />
+          <Switch label="قسم قصة البوتيك (Our Story)" checked={s.homepage.showStory ?? true} onCheckedChange={(v) => set("homepage", { showStory: v })} />
+          <Switch label="موقع المحل وأوقات الدوام" checked={s.homepage.showLocation ?? true} onCheckedChange={(v) => set("homepage", { showLocation: v })} />
         </div>
-        <div className="mt-4 grid gap-3">
-          <Field label="عنوان قسم القصة" htmlFor="st">
-            <Input id="st" value={s.homepage.storyTitle} onChange={(e) => set("homepage", { storyTitle: e.target.value })} />
-          </Field>
-          <Field label="نص القصة" htmlFor="stx">
-            <Textarea id="stx" rows={3} value={s.homepage.storyText} onChange={(e) => set("homepage", { storyText: e.target.value })} />
-          </Field>
+      </Card>
+
+      <Card title="قصتنا (Our Story)">
+        <div className="space-y-4">
+          <Switch
+            label="تفعيل وعرض قسم القصة في الصفحة الرئيسية"
+            checked={s.story?.enabled ?? true}
+            onCheckedChange={(v) => set("story", { enabled: v })}
+          />
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Field label="سطر علوي إنجليزي (Eyebrow)" htmlFor="st-ey">
+              <Input id="st-ey" dir="ltr" value={s.story?.eyebrow ?? "OUR STORY"} onChange={(e) => set("story", { eyebrow: e.target.value })} />
+            </Field>
+            <Field label="عنوان القصة الرئيسي" htmlFor="st-ti">
+              <Input id="st-ti" value={s.story?.title ?? "حكاية أناقة تبدأ بكِ"} onChange={(e) => set("story", { title: e.target.value })} />
+            </Field>
+            <Field label="السطر التمهيدي" htmlFor="st-sub" className="sm:col-span-2">
+              <Input id="st-sub" value={s.story?.subtitle ?? "لأن الأناقة تبدأ من التفاصيل..."} onChange={(e) => set("story", { subtitle: e.target.value })} />
+            </Field>
+            <Field label="المقدمة المختصرة (للصفحة الرئيسية)" htmlFor="st-hi" className="sm:col-span-2">
+              <Textarea id="st-hi" rows={3} value={s.story?.homeIntro ?? ""} onChange={(e) => set("story", { homeIntro: e.target.value })} />
+            </Field>
+            <Field label="النص الكامل للقصة (المعروض في صفحة /about)" htmlFor="st-fs" className="sm:col-span-2" hint="افصلي بين كل فقرة بسطر فارغ">
+              <Textarea id="st-fs" rows={7} value={s.story?.fullStory ?? ""} onChange={(e) => set("story", { fullStory: e.target.value })} />
+            </Field>
+            <Field label="العبارة الختامية" htmlFor="st-qt" className="sm:col-span-2">
+              <Input id="st-qt" value={s.story?.quote ?? "أناقتكِ... بأسلوب يشبهكِ."} onChange={(e) => set("story", { quote: e.target.value })} />
+            </Field>
+          </div>
+
+          <div>
+            <p className="mb-2 text-sm font-medium">صورة القصة التحريرية (اختيارية — نسبة 3:4)</p>
+            {s.story?.imageUrl ? (
+              <div className="relative w-40">
+                <div className="arch relative aspect-[3/4] overflow-hidden rounded-2xl bg-blush">
+                  <Image src={s.story.imageUrl} alt="" fill sizes="160px" className="object-cover" />
+                </div>
+                <Button variant="ghost" size="sm" className="mt-2 text-danger" onClick={() => set("story", { imageUrl: null })}>
+                  <Trash2 /> إزالة الصورة
+                </Button>
+              </div>
+            ) : (
+              <div className="max-w-xs">
+                <ImageDropzone folder="story" multiple={false} onUploaded={(img) => set("story", { imageUrl: img.url })} label="ارفعي صورة بنسبة 3:4" />
+              </div>
+            )}
+          </div>
         </div>
       </Card>
 
@@ -146,13 +196,19 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
         </Field>
       </Card>
 
-      <Card title="التوصيل والاستبدال">
+      <Card title="التوصيل والاستبدال والتحكم بأسعار الشحن">
         <div className="grid gap-3 sm:grid-cols-2">
-          <Field label="رسوم التوصيل (₪)" htmlFor="fee" hint="السياسة الافتراضية: توصيل مجاني = 0">
+          <Field label="رسوم توصيل الضفة والقدس (₪)" htmlFor="fee" hint="توصيل مجاني = 0">
             <Input id="fee" inputMode="decimal" dir="ltr" className="text-right" value={fee} onChange={(e) => setFee(e.target.value.replace(/[^\d.]/g, ""))} />
           </Field>
-          <Field label="رسالة التوصيل" htmlFor="sm">
+          <Field label="رسوم توصيل مناطق الداخل (₪)" htmlFor="insideFee" hint="الافتراضي: 30 ₪ (نصف السعر)">
+            <Input id="insideFee" inputMode="decimal" dir="ltr" className="text-right" value={insideFee} onChange={(e) => setInsideFee(e.target.value.replace(/[^\d.]/g, ""))} />
+          </Field>
+          <Field label="رسالة التوصيل العامة (المعروضة في المتجر)" htmlFor="sm" className="sm:col-span-2">
             <Input id="sm" value={s.shipping.message} onChange={(e) => set("shipping", { message: e.target.value })} />
+          </Field>
+          <Field label="رسالة توصيل مناطق الداخل (في صفحة الدفع)" htmlFor="inmsg" className="sm:col-span-2">
+            <Input id="inmsg" value={s.shipping.inside48Message ?? "توصيل مناطق الداخل بـ 30 ₪ (نصف السعر)"} onChange={(e) => set("shipping", { inside48Message: e.target.value })} />
           </Field>
           <Field label="مدة التوصيل" htmlFor="se" className="sm:col-span-2">
             <Input id="se" value={s.shipping.estimate} onChange={(e) => set("shipping", { estimate: e.target.value })} />

@@ -143,6 +143,10 @@ export async function placeOrder(raw: unknown): Promise<Result<{ redirectTo: str
     if (!area && !already) return { ok: false, error: "يرجى اختيار المنطقة", fieldErrors: { areaName: "اختاري منطقة من القائمة" } };
 
     const settings = await getSettings();
+    const city = await prisma.city.findUnique({ where: { id: data.cityId }, select: { name: true } });
+    const isInside48 = Boolean(city?.name?.includes("الداخل"));
+    const shippingFee = isInside48 ? (settings.shipping.inside48Fee ?? 3000) : settings.shipping.fee;
+
     const user = await getCurrentUser();
     const result = await createOrder(prisma, {
       lines: items,
@@ -154,7 +158,7 @@ export async function placeOrder(raw: unknown): Promise<Result<{ redirectTo: str
         addressLine: data.addressLine,
         note: data.note || null,
       },
-      shippingFee: settings.shipping.fee,
+      shippingFee,
       idempotencyKey: data.idempotencyKey,
       customerId: user?.role === "CUSTOMER" ? user.id : null,
       source: "WEBSITE",

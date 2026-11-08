@@ -177,3 +177,30 @@ input[type="range"].lux-slider::-moz-range-track {
   height: 10px;
   border-radius: 9999px;
 }
+
+/* Luxury Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f9f6f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4b8c2;
+  border-radius: 9999px;
+  border: 2px solid #f9f6f4;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8b4b65;
+}
+
+/* Luxury Card Elevation */
+.lux-card {
+  transition: transform 0.4s var(--ease-lux), box-shadow 0.4s var(--ease-lux), border-color 0.4s var(--ease-lux);
+}
+.lux-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -12px rgba(75, 31, 52, 0.18);
+  border-color: rgba(184, 138, 106, 0.4);
+}
