@@ -89,13 +89,34 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
           <p className="mt-2 inline-flex rounded-full border border-dusty/40 px-3 py-1 text-xs text-dusty">{settings.shipping.message}</p>
         </FooterCol>
       </div>
-      <div className="border-t border-ivory/15 bg-burgundy/80">
+      <div className="border-t border-ivory/15 bg-burgundy/90">
         <div className="container-lux flex flex-col items-center justify-between gap-4 py-7 text-center sm:flex-row sm:text-start">
-          <div>
-            <p className="text-base font-bold tracking-wide text-dusty sm:text-lg">
-              تصميم وتطوير وبرمجة: المهندس عبد الله © {new Date().getFullYear()}
-            </p>
-            <p className="mt-1 text-xs text-ivory/60">
+          <div className="flex flex-col items-center gap-2 sm:items-start">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
+              <a
+                href="https://www.instagram.com/ay.dev06"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Instagram: @ay.dev06"
+                className="latin group inline-flex items-center gap-2 text-sm font-bold tracking-wide text-dusty transition-colors hover:text-gold sm:text-base"
+              >
+                <InstagramIcon className="size-4 shrink-0 transition-transform group-hover:scale-110" />
+                <span className="hover:underline">Design & Development © 2026 | Abdallah Yaser</span>
+              </a>
+
+              <a
+                href="https://wa.me/972595873328"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="WhatsApp: +972 59-587-3328"
+                className="latin group inline-flex items-center gap-1.5 rounded-full border border-dusty/30 bg-ivory/5 px-3 py-1 text-xs font-semibold text-ivory transition hover:border-gold hover:bg-ivory/10 hover:text-gold sm:text-sm"
+              >
+                <WhatsAppIcon className="size-3.5 shrink-0 text-emerald-400 transition-transform group-hover:scale-110" />
+                <span>+972 59-587-3328</span>
+              </a>
+            </div>
+
+            <p className="text-xs text-ivory/60">
               جميع الحقوق محفوظة · {b.name}
             </p>
           </div>
