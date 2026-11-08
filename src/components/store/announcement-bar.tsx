@@ -10,75 +10,118 @@ export function AnnouncementBar({
   messages: string[];
   speed?: "slow" | "normal" | "fast";
 }) {
-  if (!messages.length) return null;
+  if (!messages || !messages.length) return null;
 
   // Duration in seconds based on speed setting
   const durationMap = {
-    slow: "45s",
+    slow: "48s",
     normal: "32s",
     fast: "20s",
   };
   const duration = durationMap[speed] || "32s";
 
-  // Format message text: highlight VETRINA BOUTIQUE with Playfair Display and luxury styling
-  const renderMessageText = (text: string) => {
-    if (text.includes("VETRINA BOUTIQUE")) {
-      const parts = text.split("VETRINA BOUTIQUE");
+  // Clean empty messages
+  const cleanMessages = messages.filter((m) => m && m.trim().length > 0);
+  if (!cleanMessages.length) return null;
+
+  // Repeat items inside each track half to guarantee zero gaps on large monitors (up to 4K 3840px)
+  const trackItems = [...cleanMessages, ...cleanMessages];
+
+  // Helper to render luxury highlighted message text
+  const renderMessageContent = (text: string) => {
+    let content = text;
+    let hasLeadingDiamond = false;
+
+    if (content.startsWith("✦")) {
+      hasLeadingDiamond = true;
+      content = content.replace(/^✦\s*/, "");
+    }
+
+    if (content.includes("VETRINA BOUTIQUE")) {
+      const parts = content.split("VETRINA BOUTIQUE");
       return (
-        <span>
-          {parts[0]}
-          <span className="latin font-display font-semibold tracking-wider text-[#D9A6B6]">
+        <span className="inline-flex items-center gap-1.5">
+          {hasLeadingDiamond && (
+            <span className="text-[#D9A6B6] text-xs select-none">✦</span>
+          )}
+          <span>{parts[0]}</span>
+          <span className="latin font-display font-semibold tracking-wider text-[#D9A6B6] text-[13px] sm:text-sm">
             VETRINA BOUTIQUE
           </span>
-          {parts[1]}
+          <span>{parts[1]}</span>
         </span>
       );
     }
-    return <span>{text}</span>;
+
+    return (
+      <span className="inline-flex items-center gap-1.5">
+        {hasLeadingDiamond && (
+          <span className="text-[#D9A6B6] text-xs select-none">✦</span>
+        )}
+        <span>{content}</span>
+      </span>
+    );
   };
 
   return (
-    <div
+    <aside
       role="region"
-      aria-label="إعلانات المتجر"
-      className="group relative z-40 overflow-hidden border-b border-[#3f1a2b] bg-[#4B1F34] text-[#F9F6F4]"
+      aria-label="شريط الإعلانات التسويقية"
+      className="group relative z-40 w-full overflow-hidden border-b border-[#3b1728] bg-[#4B1F34] text-[#F9F6F4] select-none"
     >
       <div className="pt-safe" />
       <div className="relative flex h-9 sm:h-10 items-center overflow-hidden">
-        {/* Infinite marquee track containing duplicated sets for seamless continuous looping */}
+        {/* Infinite streaming marquee track (hardware accelerated translate3d) */}
         <div
-          className="flex w-max items-center whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:overflow-x-auto"
+          dir="ltr"
+          className="flex w-max items-center whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused] group-active:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:overflow-x-auto"
           style={{
             animation: `marquee-announcement ${duration} linear infinite`,
           }}
         >
-          {/* First set */}
-          <div className="flex items-center shrink-0">
-            {messages.map((msg, idx) => (
-              <span key={`a-${idx}`} className="flex items-center text-xs sm:text-[13px] font-medium tracking-wide">
-                <span className="inline-block px-3 sm:px-5">{renderMessageText(msg)}</span>
+          {/* Track 1: First complete set */}
+          <div className="flex shrink-0 items-center">
+            {trackItems.map((msg, idx) => (
+              <span
+                key={`track1-${idx}`}
+                dir="rtl"
+                className="flex items-center text-xs sm:text-[13px] font-medium tracking-wide"
+              >
+                <span className="inline-block px-3 sm:px-5">
+                  {renderMessageContent(msg)}
+                </span>
                 <span
-                  aria-hidden
-                  className="inline-block size-1.5 rounded-full bg-[#8B4B65] shadow-[0_0_6px_rgba(139,75,101,0.7)]"
-                />
+                  aria-hidden="true"
+                  className="inline-flex items-center justify-center px-1 select-none"
+                >
+                  <span className="size-1.5 rounded-full bg-[#D9A6B6] shadow-[0_0_8px_rgba(217,166,182,0.85)]" />
+                </span>
               </span>
             ))}
           </div>
 
-          {/* Second duplicate set for perfectly seamless gap-free infinite streaming */}
-          <div className="flex items-center shrink-0" aria-hidden>
-            {messages.map((msg, idx) => (
-              <span key={`b-${idx}`} className="flex items-center text-xs sm:text-[13px] font-medium tracking-wide">
-                <span className="inline-block px-3 sm:px-5">{renderMessageText(msg)}</span>
+          {/* Track 2: Identical second set for seamless, mathematically perfect gap-free looping */}
+          <div className="flex shrink-0 items-center" aria-hidden="true">
+            {trackItems.map((msg, idx) => (
+              <span
+                key={`track2-${idx}`}
+                dir="rtl"
+                className="flex items-center text-xs sm:text-[13px] font-medium tracking-wide"
+              >
+                <span className="inline-block px-3 sm:px-5">
+                  {renderMessageContent(msg)}
+                </span>
                 <span
-                  aria-hidden
-                  className="inline-block size-1.5 rounded-full bg-[#8B4B65] shadow-[0_0_6px_rgba(139,75,101,0.7)]"
-                />
+                  aria-hidden="true"
+                  className="inline-flex items-center justify-center px-1 select-none"
+                >
+                  <span className="size-1.5 rounded-full bg-[#D9A6B6] shadow-[0_0_8px_rgba(217,166,182,0.85)]" />
+                </span>
               </span>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

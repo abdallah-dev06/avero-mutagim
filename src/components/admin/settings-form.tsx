@@ -10,7 +10,7 @@ import { Card } from "@/components/admin/admin-shell";
 import { ImageDropzone } from "@/components/admin/image-upload";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Select, Switch, Textarea } from "@/components/ui/form";
-import type { SiteSettings } from "@/lib/settings-schema";
+import { DEFAULT_SETTINGS, type SiteSettings } from "@/lib/settings-schema";
 
 export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canEdit: boolean }) {
   const router = useRouter();
@@ -293,6 +293,65 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
           <Field label="سياسة الاستبدال والإرجاع" htmlFor="rp" className="sm:col-span-2">
             <Textarea id="rp" rows={3} value={s.shipping.returnsPolicy} onChange={(e) => set("shipping", { returnsPolicy: e.target.value })} />
           </Field>
+        </div>
+      </Card>
+
+      <Card title="زر واتساب العائم (WhatsApp Floating Button)">
+        <div className="space-y-4">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Switch
+              label="تفعيل زر واتساب العائم في المتجر"
+              checked={s.whatsappButton?.enabled ?? true}
+              onCheckedChange={(v) =>
+                set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), enabled: v })
+              }
+            />
+            <Switch
+              label="إظهار فقاعة ترحيبية ناعمة (Tooltip)"
+              checked={s.whatsappButton?.showTooltip ?? true}
+              onCheckedChange={(v) =>
+                set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), showTooltip: v })
+              }
+            />
+            <Switch
+              label="إخفاء الزر تلقائياً في صفحة إتمام الطلب (Checkout)"
+              checked={s.whatsappButton?.hideOnCheckout ?? true}
+              onCheckedChange={(v) =>
+                set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), hideOnCheckout: v })
+              }
+            />
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Field label="رقم واتساب المخصص للزر" htmlFor="wa-btn-phone" hint="مثال: +970599571202">
+              <Input
+                id="wa-btn-phone"
+                dir="ltr"
+                value={s.whatsappButton?.phoneNumber ?? s.business.whatsappNumber}
+                onChange={(e) =>
+                  set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), phoneNumber: e.target.value })
+                }
+              />
+            </Field>
+            <Field label="نص الفقاعة الترحيبية" htmlFor="wa-tooltip-text">
+              <Input
+                id="wa-tooltip-text"
+                value={s.whatsappButton?.tooltipMessage ?? "أهلًا فيكِ 🌸\nمحتاجة مساعدة باختيار إطلالتكِ؟ تواصلي معنا!"}
+                onChange={(e) =>
+                  set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), tooltipMessage: e.target.value })
+                }
+              />
+            </Field>
+            <Field label="الرسالة التلقائية الافتراضية" htmlFor="wa-def-msg" className="sm:col-span-2">
+              <Textarea
+                id="wa-def-msg"
+                rows={2}
+                value={s.whatsappButton?.defaultMessage ?? "مرحبًا VETRINA BOUTIQUE 🌸\nحابّة أستفسر عن منتجاتكم، ممكن تساعدوني؟"}
+                onChange={(e) =>
+                  set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), defaultMessage: e.target.value })
+                }
+              />
+            </Field>
+          </div>
         </div>
       </Card>
 

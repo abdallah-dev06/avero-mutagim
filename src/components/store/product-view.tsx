@@ -80,6 +80,21 @@ export function ProductView({
     return () => io.disconnect();
   }, []);
 
+  // Broadcast current product and variant context to Floating WhatsApp Button
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const detail = {
+      productName: product.name,
+      colorName: color?.name ?? null,
+      size: effectiveSize ?? null,
+      productUrl: window.location.href,
+    };
+    window.dispatchEvent(new CustomEvent("vb:product-context", { detail }));
+    return () => {
+      window.dispatchEvent(new CustomEvent("vb:product-context", { detail: null }));
+    };
+  }, [product.name, color?.name, effectiveSize]);
+
   const pickColor = (id: string) => {
     // Selected size may not exist for the new colour.
     if (size && !product.variants.some((v) => v.colorId === id && v.size === size)) setSize(null);

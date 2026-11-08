@@ -1,10 +1,24 @@
 import type { NextConfig } from "next";
 
-const remotePatterns: NonNullable<NextConfig["images"]>["remotePatterns"] = [];
+const remotePatterns: NonNullable<NextConfig["images"]>["remotePatterns"] = [
+  { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
+  { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
+  { protocol: "https", hostname: "**.public.blob.vercel-storage.com", pathname: "/**" },
+  { protocol: "https", hostname: "**.supabase.co", pathname: "/**" },
+  { protocol: "https", hostname: "**.r2.cloudflarestorage.com", pathname: "/**" },
+  { protocol: "https", hostname: "**.amazonaws.com", pathname: "/**" },
+];
+
 const publicBase = process.env.S3_PUBLIC_BASE_URL;
 if (publicBase) {
-  const u = new URL(publicBase);
-  remotePatterns.push({ protocol: u.protocol.replace(":", "") as "https" | "http", hostname: u.hostname, pathname: "/**" });
+  try {
+    const u = new URL(publicBase);
+    remotePatterns.push({
+      protocol: u.protocol.replace(":", "") as "https" | "http",
+      hostname: u.hostname,
+      pathname: "/**",
+    });
+  } catch {}
 }
 
 const securityHeaders = [
@@ -23,7 +37,7 @@ const nextConfig: NextConfig = {
     remotePatterns,
   },
   experimental: {
-    serverActions: { bodySizeLimit: "2mb" },
+    serverActions: { bodySizeLimit: "4mb" },
   },
   async headers() {
     return [

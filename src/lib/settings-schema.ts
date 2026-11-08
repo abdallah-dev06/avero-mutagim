@@ -83,6 +83,27 @@ export const siteSettingsSchema = z.object({
   inventory: z.object({
     defaultLowStockThreshold: z.number().int().min(0).max(1000),
   }),
+  whatsappButton: z
+    .object({
+      enabled: z.boolean().default(true),
+      phoneNumber: z.string().trim().max(25).default("+970599571202"),
+      defaultMessage: z.string().trim().max(300).default(
+        "مرحبًا VETRINA BOUTIQUE 🌸\nحابّة أستفسر عن منتجاتكم، ممكن تساعدوني؟"
+      ),
+      tooltipMessage: z.string().trim().max(200).default(
+        "أهلًا فيكِ 🌸\nمحتاجة مساعدة باختيار إطلالتكِ؟ تواصلي معنا!"
+      ),
+      showTooltip: z.boolean().default(true),
+      hideOnCheckout: z.boolean().default(true),
+    })
+    .default({
+      enabled: true,
+      phoneNumber: "+970599571202",
+      defaultMessage: "مرحبًا VETRINA BOUTIQUE 🌸\nحابّة أستفسر عن منتجاتكم، ممكن تساعدوني؟",
+      tooltipMessage: "أهلًا فيكِ 🌸\nمحتاجة مساعدة باختيار إطلالتكِ؟ تواصلي معنا!",
+      showTooltip: true,
+      hideOnCheckout: true,
+    }),
   revenue: z.object({
     recognizeOn: z.enum(["DELIVERED", "PAID"]),
   }),
@@ -95,11 +116,11 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     enabled: true,
     speed: "normal",
     messages: [
-      "تألّقي بأسلوبكِ الخاص مع VETRINA BOUTIQUE",
-      "إطلالات تخطف الأنظار... وتفاصيل تُحكى 🌸",
-      "توصيل مجاني للضفة الغربية والقدس والداخل.",
-      "الدفع عند الاستلام.",
-      "تشكيلة جديدة كل أسبوع.",
+      "✦ تألّقي بأسلوبكِ الخاص مع VETRINA BOUTIQUE",
+      "إطلالات تخطف الأنظار... وتفاصيل تُحكى",
+      "توصيل مجاني للضفة الغربية والقدس والداخل",
+      "الدفع عند الاستلام",
+      "تشكيلة جديدة كل أسبوع",
     ],
   },
   hero: {
@@ -160,5 +181,13 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     description: "متجر أزياء نسائية راقية في فلسطين: عبايات، بلايز، بناطيل، شالات وأطقم. توصيل مجاني للضفة والقدس وللداخل بـ 30 ₪ والدفع عند الاستلام.",
   },
   inventory: { defaultLowStockThreshold: 3 },
+  whatsappButton: {
+    enabled: true,
+    phoneNumber: "+970599571202",
+    defaultMessage: "مرحبًا VETRINA BOUTIQUE 🌸\nحابّة أستفسر عن منتجاتكم، ممكن تساعدوني؟",
+    tooltipMessage: "أهلًا فيكِ 🌸\nمحتاجة مساعدة باختيار إطلالتكِ؟ تواصلي معنا!",
+    showTooltip: true,
+    hideOnCheckout: true,
+  },
   revenue: { recognizeOn: "DELIVERED" },
 };

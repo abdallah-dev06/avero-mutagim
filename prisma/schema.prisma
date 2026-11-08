@@ -460,3 +460,15 @@ model Testimonial {
   sortOrder Int      @default(0)
   createdAt DateTime @default(now())
 }
+
+model StoredMedia {
+  key       String   @id
+  mimeType  String   @default("image/webp")
+  data      Bytes
+  width     Int?
+  height    Int?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
