@@ -10,7 +10,7 @@ export const productPayloadSchema = z
     categoryId: z.string().nullable(),
     description: z.string().trim().max(5000),
     careInstructions: z.string().trim().max(2000).optional(),
-    price: z.number().int().min(1, "السعر مطلوب").max(10_000_000),
+    price: z.number().int().min(0, "السعر مطلوب").max(10_000_000),
     salePrice: z.number().int().min(1).max(10_000_000).nullable(),
     status: z.enum(["DRAFT", "PUBLISHED"]),
     isFeatured: z.boolean(),

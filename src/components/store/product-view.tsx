@@ -11,6 +11,8 @@ import { ProductGallery, type GalleryImage } from "@/components/store/product-ga
 import { Price } from "@/components/store/price";
 import { SizeChartTable, SizeFinder, type SizeChartData } from "@/components/store/size-guide";
 import { WishlistButton } from "@/components/store/wishlist-button";
+import { WhatsAppIcon } from "@/components/store/social-icons";
+import { waMeLink } from "@/lib/whatsapp";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/sheet";
 import { defaultColor, galleryForColor, selectVariant } from "@/lib/variant-selection";
@@ -46,6 +48,7 @@ export function ProductView({
   shippingMessage,
   shippingEstimate,
   returnsPolicy,
+  whatsappNumber,
 }: {
   product: ProductViewData;
   chart: SizeChartData | null;
@@ -54,6 +57,7 @@ export function ProductView({
   shippingMessage: string;
   shippingEstimate: string;
   returnsPolicy: string;
+  whatsappNumber?: string;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -71,6 +75,15 @@ export function ProductView({
   const singleSize = sizes.length === 1 ? sizes[0] : null;
   const status = variant ? stockLabel(variant.stock) : colorVariants.length ? stockLabel(colorStock) : stockLabel(0);
   const galleryImages = galleryForColor(product.images, colorId);
+
+  const isUnpriced = product.price <= 0;
+  const targetPhone = whatsappNumber || "+970599571202";
+  const selectedSizeLabel = effectiveSize ? (effectiveSize === "ONE SIZE" ? "مقاس واحد" : effectiveSize) : "";
+  const inquiryMessage = `مرحباً بوتيك فيترينا 🌸، أود الاستفسار عن توفر وطلب:
+• القطعة: ${product.name}
+${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `• المقاس: ${selectedSizeLabel}\n` : ""}
+رابط المنتج: ${typeof window !== "undefined" ? window.location.href : ""}`;
+  const whatsappUrl = waMeLink(targetPhone, inquiryMessage);
 
   React.useEffect(() => {
     const el = ctaRef.current;
@@ -245,33 +258,63 @@ export function ProductView({
         </fieldset>
 
         {/* Qty + CTA */}
-        <div ref={ctaRef} className="mt-7 flex flex-wrap items-stretch gap-3">
-          <div className="flex h-13 items-center rounded-full border border-line bg-white" role="group" aria-label="الكمية">
-            <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} disabled={qty <= 1} className="grid size-12 place-items-center text-burgundy disabled:opacity-30" aria-label="إنقاص الكمية">
-              <Minus className="size-4" />
-            </button>
-            <output className="latin w-8 text-center font-medium" aria-live="polite">
-              {qty}
-            </output>
-            <button type="button" onClick={() => setQty((q) => Math.min(Math.max(1, maxQty), q + 1))} disabled={!variant || qty >= maxQty} className="grid size-12 place-items-center text-burgundy disabled:opacity-30" aria-label="زيادة الكمية">
-              <Plus className="size-4" />
-            </button>
+        {isUnpriced ? (
+          <div ref={ctaRef} className="mt-7 space-y-3">
+            <div className="flex items-center gap-3 rounded-2xl border border-mauve/25 bg-blush/60 px-4 py-3">
+              <span className="size-2.5 rounded-full bg-burgundy animate-pulse shrink-0" />
+              <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                <span className="text-sm font-semibold text-burgundy">السعر قيد التحديد</span>
+                <span className="text-xs text-muted">الطلب والاستفسار متوفر مباشرة عبر واتساب</span>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-stretch gap-3">
+              <Button
+                size="lg"
+                className="h-13 min-w-0 flex-1 bg-[#25D366] text-white hover:bg-[#20ba59] border-none shadow-sm text-[0.95rem] font-medium"
+                asChild
+              >
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  <WhatsAppIcon className="size-5 shrink-0" />
+                  <span>استفسري عن السعر والطلب عبر واتساب</span>
+                </a>
+              </Button>
+              <WishlistButton productId={product.id} initial={wished} withLabel className="h-13 w-full sm:w-auto" />
+            </div>
           </div>
-          <Button size="lg" className="h-13 min-w-0 flex-1" onClick={add} loading={pending} disabled={(variant && variant.stock <= 0) || colorStock <= 0}>
-            <AnimatePresence mode="wait" initial={false}>
-              {added ? (
-                <motion.span key="ok" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -10, opacity: 0 }} className="flex items-center gap-2">
-                  <Check /> تمت الإضافة
-                </motion.span>
-              ) : (
-                <motion.span key="add" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -10, opacity: 0 }} className="flex items-center gap-2">
-                  <ShoppingBag /> {colorStock <= 0 || (variant && variant.stock <= 0) ? "نفدت الكمية" : "أضيفي إلى السلة"}
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </Button>
-          <WishlistButton productId={product.id} initial={wished} withLabel className="h-13 w-full sm:w-auto" />
-        </div>
+        ) : (
+          <div ref={ctaRef} className="mt-7 flex flex-wrap items-stretch gap-3">
+            <div className="flex h-13 items-center rounded-full border border-line bg-white" role="group" aria-label="الكمية">
+              <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} disabled={qty <= 1} className="grid size-12 place-items-center text-burgundy disabled:opacity-30" aria-label="إنقاص الكمية">
+                <Minus className="size-4" />
+              </button>
+              <output className="latin w-8 text-center font-medium" aria-live="polite">
+                {qty}
+              </output>
+              <button type="button" onClick={() => setQty((q) => Math.min(Math.max(1, maxQty), q + 1))} disabled={!variant || qty >= maxQty} className="grid size-12 place-items-center text-burgundy disabled:opacity-30" aria-label="زيادة الكمية">
+                <Plus className="size-4" />
+              </button>
+            </div>
+            <Button size="lg" className="h-13 min-w-0 flex-1" onClick={add} loading={pending} disabled={(variant && variant.stock <= 0) || colorStock <= 0}>
+              <AnimatePresence mode="wait" initial={false}>
+                {added ? (
+                  <motion.span key="ok" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -10, opacity: 0 }} className="flex items-center gap-2">
+                    <Check /> تمت الإضافة
+                  </motion.span>
+                ) : (
+                  <motion.span key="add" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -10, opacity: 0 }} className="flex items-center gap-2">
+                    <ShoppingBag /> {colorStock <= 0 || (variant && variant.stock <= 0) ? "نفدت الكمية" : "أضيفي إلى السلة"}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Button>
+            <WishlistButton productId={product.id} initial={wished} withLabel className="h-13 w-full sm:w-auto" />
+          </div>
+        )}
 
         <div className="mt-8 divide-y divide-line border-y border-line">
           <Accordion title="الوصف" defaultOpen>
@@ -307,15 +350,34 @@ export function ProductView({
           >
             <div className="flex items-center gap-3">
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm text-ink">{product.name}</p>
+                <p className="truncate text-sm font-medium text-ink">{product.name}</p>
                 <p className="text-xs text-muted">
-                  {color?.name}
-                  {effectiveSize ? ` · ${sizeName(effectiveSize)}` : " · اختاري المقاس"}
+                  {isUnpriced ? (
+                    <span className="font-semibold text-burgundy">السعر قيد التحديد</span>
+                  ) : (
+                    <>
+                      {color?.name}
+                      {effectiveSize ? ` · ${sizeName(effectiveSize)}` : " · اختاري المقاس"}
+                    </>
+                  )}
                 </p>
               </div>
-              <Button onClick={add} loading={pending} disabled={(variant && variant.stock <= 0) || colorStock <= 0} className="shrink-0">
-                <ShoppingBag /> أضيفي
-              </Button>
+              {isUnpriced ? (
+                <Button
+                  size="sm"
+                  className="shrink-0 bg-[#25D366] text-white hover:bg-[#20ba59] border-none font-medium px-4"
+                  asChild
+                >
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5">
+                    <WhatsAppIcon className="size-4 shrink-0" />
+                    <span>واتساب</span>
+                  </a>
+                </Button>
+              ) : (
+                <Button onClick={add} loading={pending} disabled={(variant && variant.stock <= 0) || colorStock <= 0} className="shrink-0">
+                  <ShoppingBag /> أضيفي
+                </Button>
+              )}
             </div>
           </motion.div>
         )}

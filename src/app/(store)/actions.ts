@@ -26,8 +26,12 @@ export async function addToCart(variantId: string, quantity: number): Promise<Re
     if (typeof variantId !== "string" || !Number.isInteger(quantity) || quantity < 1 || quantity > MAX_QTY_PER_LINE) {
       throw new DomainError("كمية غير صالحة");
     }
-    const variant = await prisma.productVariant.findUnique({ where: { id: variantId }, include: { product: { select: { status: true } } } });
+    const variant = await prisma.productVariant.findUnique({
+      where: { id: variantId },
+      include: { product: { select: { status: true, price: true } } },
+    });
     if (!variant || !variant.isActive || variant.product.status !== "PUBLISHED") throw new DomainError("هذا الخيار غير متاح");
+    if (variant.product.price <= 0) throw new DomainError("هذا المنتج قيد تحديد السعر حالياً، يرجى الاستفسار والطلب عبر واتساب");
     const shopper = await ensureShopper();
     const existing = await prisma.cartItem.findUnique({ where: { shopperId_variantId: { shopperId: shopper.id, variantId } } });
     const nextQty = (existing?.quantity ?? 0) + quantity;

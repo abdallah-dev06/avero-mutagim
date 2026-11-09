@@ -115,6 +115,7 @@ export default async function ProductPage({ params, searchParams }: PageProps<"/
         shippingMessage={settings.shipping.message}
         shippingEstimate={settings.shipping.estimate}
         returnsPolicy={settings.shipping.returnsPolicy}
+        whatsappNumber={settings.whatsappButton?.phoneNumber || settings.business.whatsappNumber}
       />
       {related.length > 0 && (
         <section className="mt-20 md:mt-28">
