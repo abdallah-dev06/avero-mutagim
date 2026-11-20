@@ -92,8 +92,8 @@ export function AdminShell({ user, counts, children }: { user: { name: string; r
         <div className="flex items-center gap-3 border-b border-line px-5 py-4">
           <Image src="/brand/logo-round.png" alt="" width={40} height={40} className="rounded-full" />
           <div className="latin leading-none">
-            <p className="font-display tracking-[0.18em] text-burgundy">VETRINA</p>
-            <p className="mt-1 text-[10px] tracking-[0.3em] text-mauve">ADMIN</p>
+            <p className="font-display tracking-[0.18em] text-burgundy font-semibold">AVERO</p>
+            <p className="mt-1 text-[10px] tracking-[0.3em] text-gold font-medium">MUTAGIM</p>
           </div>
         </div>
         <div className="flex-1 overflow-y-auto">
@@ -117,7 +117,7 @@ export function AdminShell({ user, counts, children }: { user: { name: string; r
               </div>
             </SheetContent>
           </Dialog>
-          <p className="latin font-display tracking-[0.18em] text-burgundy">VETRINA</p>
+          <p className="latin font-display tracking-[0.18em] text-burgundy">AVERO MUTAGIM</p>
           <Link href="/admin/orders" className="relative grid size-11 place-items-center rounded-full text-burgundy hover:bg-blush" aria-label={`الطلبات الجديدة (${counts.orders})`}>
             <ClipboardList className="size-5" />
             {counts.orders > 0 && <span className="latin absolute left-1 top-1 grid min-w-[18px] place-items-center rounded-full bg-burgundy px-1 text-[10px] font-bold leading-[18px] text-ivory">{counts.orders}</span>}

@@ -35,7 +35,7 @@ export function FloatingWhatsAppButton({
   const [mounted, setMounted] = React.useState(false);
 
   // Clean phone digits for wa.me
-  const cleanNumber = waDigits(phoneNumber || "+970599571202");
+  const cleanNumber = waDigits(phoneNumber || "+972528982522");
 
   // Listen to product page context changes
   React.useEffect(() => {
@@ -98,10 +98,10 @@ export function FloatingWhatsAppButton({
   if (!mounted) return null;
 
   // Build tailored message
-  let message = defaultMessage || "مرحبًا VETRINA BOUTIQUE 🌸\nحابّة أستفسر عن منتجاتكم، ممكن تساعدوني؟";
+  let message = defaultMessage || "مرحباً AVERO MUTAGIM 👑\nأود الاستفسار عن التشكيلة والطلب.";
 
   if (productContext && pathname?.startsWith("/product/")) {
-    const lines = ["مرحبًا VETRINA BOUTIQUE 🌸", `حابّة أستفسر عن: ${productContext.productName}`];
+    const lines = ["مرحباً AVERO MUTAGIM 👑", `أود الاستفسار عن: ${productContext.productName}`];
     if (productContext.colorName) {
       lines.push(`اللون: ${productContext.colorName}`);
     }
@@ -177,7 +177,7 @@ export function FloatingWhatsAppButton({
           href={waHref}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="تواصلي معنا عبر واتساب — VETRINA BOUTIQUE"
+          aria-label="تواصل معنا عبر واتساب — AVERO MUTAGIM"
           title="محادثة واتساب مباشرة"
           className={cn(
             // Touch target size compliant with Apple HIG (>=48px) and Android Material

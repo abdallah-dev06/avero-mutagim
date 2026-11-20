@@ -3,8 +3,8 @@ import { prisma } from "@/lib/db";
 import { ReviewsView } from "@/components/store/reviews-view";
 
 export const metadata: Metadata = {
-  title: "آراء وتجارب زبوناتنا | Customer Reviews",
-  description: "آراء وتقييمات زبونات فيترينا بوتيك الحقيقية. شاركينا تجربتكِ واقرئي آراء زبوناتنا بكل شفافية ومصداقية.",
+  title: "آراء وتجارب عملائنا | Customer Reviews",
+  description: "آراء وتقييمات عملاء AVERO MUTAGIM الحقيقية. شاركنا تجربتك واقرأ آراء عملائنا بكل شفافية ومصداقية.",
   alternates: { canonical: "/reviews" },
 };
 

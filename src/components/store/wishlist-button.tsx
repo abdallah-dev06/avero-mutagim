@@ -47,7 +47,7 @@ export function WishlistButton({ productId, initial, className, withLabel }: { p
       <motion.span key={String(wished)} initial={{ scale: 0.6 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 500, damping: 15 }}>
         <Heart className={cn("size-[19px]", wished && "fill-burgundy")} strokeWidth={1.7} />
       </motion.span>
-      {withLabel && <span>{wished ? "في المفضلة" : "أضيفي للمفضلة"}</span>}
+      {withLabel && <span>{wished ? "في المفضلة" : "أضف للمفضلة"}</span>}
     </button>
   );
 }

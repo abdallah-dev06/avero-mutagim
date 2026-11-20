@@ -26,8 +26,8 @@ export default async function PrintPage({ params }: PageProps<"/admin/print/[id]
         <div className="flex items-center gap-3">
           <Image src="/brand/logo-round.png" alt="" width={56} height={56} className="rounded-full" />
           <div className="latin leading-none">
-            <p className="font-display text-xl tracking-[0.2em] text-burgundy">VETRINA</p>
-            <p className="mt-1 text-[10px] tracking-[0.4em] text-mauve">BOUTIQUE</p>
+            <p className="font-display text-xl tracking-[0.2em] text-burgundy">AVERO</p>
+            <p className="mt-1 text-[10px] tracking-[0.4em] text-gold">MUTAGIM</p>
           </div>
         </div>
         <div className="text-left">

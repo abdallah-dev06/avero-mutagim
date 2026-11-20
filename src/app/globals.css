@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-burgundy: #4b1f34;
-  --color-burgundy-900: #33131f;
-  --color-burgundy-800: #3f1a2b;
-  --color-mauve: #8b4b65;
-  --color-dusty: #d9a6b6;
-  --color-blush: #f7e8ec;
-  --color-ivory: #f9f6f4;
-  --color-ink: #2b1720;
-  --color-muted: #6c5561;
-  --color-line: #ead9de;
-  --color-gold: #b88a6a;
-  --color-success: #2f6b4f;
-  --color-danger: #a12a3f;
+  --color-burgundy: #0b4d3b;
+  --color-burgundy-900: #06281f;
+  --color-burgundy-800: #083b2d;
+  --color-mauve: #16604b;
+  --color-dusty: #d4af37;
+  --color-blush: #f4ebd9;
+  --color-ivory: #faf7f0;
+  --color-ink: #1a1e1a;
+  --color-muted: #56635a;
+  --color-line: #e3dacd;
+  --color-gold: #d4af37;
+  --color-success: #1f7a4d;
+  --color-danger: #a82a3a;
 
   --font-sans: var(--font-tajawal), "Segoe UI", Tahoma, system-ui, sans-serif;
   --font-display: var(--font-playfair), "Times New Roman", Georgia, serif;
@@ -112,7 +112,7 @@ body {
 .no-scrollbar { scrollbar-width: none; }
 
 .skeleton {
-  background: linear-gradient(90deg, #f1e4e8 0%, #f9f0f2 50%, #f1e4e8 100%);
+  background: linear-gradient(90deg, #ede6d8 0%, #f6f1e8 50%, #ede6d8 100%);
   background-size: 200% 100%;
   animation: var(--animate-shimmer);
 }
@@ -204,15 +204,15 @@ input[type="range"].lux-slider::-moz-range-track {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f9f6f4;
+  background: #faf7f0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4b8c2;
+  background: #cdd6cf;
   border-radius: 9999px;
-  border: 2px solid #f9f6f4;
+  border: 2px solid #faf7f0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8b4b65;
+  background: #0b4d3b;
 }
 
 /* Luxury Card Elevation */
@@ -221,6 +221,6 @@ input[type="range"].lux-slider::-moz-range-track {
 }
 .lux-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px -12px rgba(75, 31, 52, 0.18);
-  border-color: rgba(184, 138, 106, 0.4);
+  box-shadow: 0 16px 36px -12px rgba(11, 77, 59, 0.18);
+  border-color: rgba(212, 175, 55, 0.45);
 }

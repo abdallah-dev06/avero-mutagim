@@ -4,7 +4,7 @@ import { requireAdminPage } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getSettings } from "@/lib/settings";
 
-export const metadata: Metadata = { title: { default: "لوحة الإدارة", template: "%s | إدارة VETRINA" }, robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: { default: "لوحة الإدارة", template: "%s | إدارة AVERO MUTAGIM" }, robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {

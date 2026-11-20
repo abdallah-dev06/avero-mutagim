@@ -57,7 +57,7 @@ export default async function ProductPage({ params, searchParams }: PageProps<"/
     description: p.description,
     url: absoluteUrl(`/product/${p.slug}`),
     productGroupID: p.id,
-    brand: { "@type": "Brand", name: "VETRINA BOUTIQUE" },
+    brand: { "@type": "Brand", name: "AVERO MUTAGIM" },
     image: p.images.slice(0, 6).map((i) => absoluteUrl(i.url)),
     variesBy: ["https://schema.org/color", "https://schema.org/size"],
     hasVariant: p.variants.slice(0, 50).map((v) => ({

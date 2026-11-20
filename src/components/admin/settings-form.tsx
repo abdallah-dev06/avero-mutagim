@@ -335,7 +335,7 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
             <Field label="نص الفقاعة الترحيبية" htmlFor="wa-tooltip-text">
               <Input
                 id="wa-tooltip-text"
-                value={s.whatsappButton?.tooltipMessage ?? "أهلًا فيكِ 🌸\nمحتاجة مساعدة باختيار إطلالتكِ؟ تواصلي معنا!"}
+                value={s.whatsappButton?.tooltipMessage ?? "أهلاً بك في AVERO MUTAGIM 👑\nهل تحتاج مساعدة باختيار مقاسك أو إطلالتك؟"}
                 onChange={(e) =>
                   set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), tooltipMessage: e.target.value })
                 }
@@ -345,7 +345,7 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
               <Textarea
                 id="wa-def-msg"
                 rows={2}
-                value={s.whatsappButton?.defaultMessage ?? "مرحبًا VETRINA BOUTIQUE 🌸\nحابّة أستفسر عن منتجاتكم، ممكن تساعدوني؟"}
+                value={s.whatsappButton?.defaultMessage ?? "مرحباً AVERO MUTAGIM 👑\nأود الاستفسار عن التشكيلة والمنتجات، هل يمكن مساعدتي؟"}
                 onChange={(e) =>
                   set("whatsappButton", { ...(s.whatsappButton ?? DEFAULT_SETTINGS.whatsappButton), defaultMessage: e.target.value })
                 }

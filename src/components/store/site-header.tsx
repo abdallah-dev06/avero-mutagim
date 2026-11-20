@@ -59,7 +59,7 @@ export function SiteHeader({
               <nav className="flex flex-col px-5 py-4" aria-label="القائمة الرئيسية" onClick={(e) => (e.target as HTMLElement).closest("a") && setMenuOpen(false)}>
                 <MobileLink href="/">الرئيسية</MobileLink>
                 <MobileLink href="/about">قصتنا | Our Story</MobileLink>
-                <MobileLink href="/reviews">آراء زبوناتنا</MobileLink>
+                <MobileLink href="/reviews">آراء عملائنا</MobileLink>
                 <MobileLink href="/shop?sort=new">وصل حديثاً</MobileLink>
                 <MobileLink href="/shop">كل المنتجات</MobileLink>
                 <p className="mt-5 mb-1 text-xs font-medium tracking-wide text-muted">الأقسام</p>
@@ -69,9 +69,8 @@ export function SiteHeader({
                   </MobileLink>
                 ))}
                 <div className="hairline my-5" />
-                <MobileLink href="/size-guide">دليل المقاسات</MobileLink>
                 <MobileLink href="/track">تتبّع طلبك</MobileLink>
-                <MobileLink href="/policies">التوصيل والاستبدال</MobileLink>
+                <MobileLink href="/policies">الشحن والتوصيل</MobileLink>
                 <div className="mt-6 flex gap-3">
                   <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="flex-1 rounded-full border border-line py-3 text-center text-sm text-burgundy">
                     إنستغرام
@@ -95,14 +94,11 @@ export function SiteHeader({
               {c.name}
             </DesktopLink>
           ))}
-          <DesktopLink href="/size-guide" active={pathname === "/size-guide"}>
-            دليل المقاسات
-          </DesktopLink>
           <DesktopLink href="/about" active={pathname === "/about"}>
             قصتنا
           </DesktopLink>
           <DesktopLink href="/reviews" active={pathname === "/reviews"}>
-            آراء الزبونات
+            آراء العملاء
           </DesktopLink>
         </nav>
 

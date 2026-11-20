@@ -37,18 +37,19 @@ export function AnnouncementBar({
       content = content.replace(/^[✦★☆⭐✨●]\s*/, "");
     }
 
-    if (content.includes("VETRINA BOUTIQUE")) {
-      const parts = content.split("VETRINA BOUTIQUE");
+    if (content.includes("AVERO MUTAGIM") || content.includes("VETRINA BOUTIQUE")) {
+      const brandStr = content.includes("AVERO MUTAGIM") ? "AVERO MUTAGIM" : "VETRINA BOUTIQUE";
+      const parts = content.split(brandStr);
       return (
         <span className="inline-flex items-center gap-1.5">
           {hasLeadingDot && (
-            <span className="text-[#D9A6B6] text-[10px] select-none" aria-hidden="true">
+            <span className="text-gold text-[10px] select-none" aria-hidden="true">
               ●
             </span>
           )}
           <span>{parts[0]}</span>
-          <span className="latin font-display font-semibold tracking-wider text-[#D9A6B6] text-[13px] sm:text-sm">
-            VETRINA BOUTIQUE
+          <span className="latin font-display font-semibold tracking-wider text-gold text-[13px] sm:text-sm">
+            AVERO MUTAGIM
           </span>
           <span>{parts[1]}</span>
         </span>

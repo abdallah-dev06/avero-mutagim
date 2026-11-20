@@ -73,7 +73,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
   return (
     <div>
       {/* ───────────── Header / Summary Card ───────────── */}
-      <div className="relative overflow-hidden rounded-[28px] border border-gold/30 bg-gradient-to-br from-[#331322] via-[#2a101c] to-[#1f0b15] p-6 sm:p-10 text-ivory shadow-[0_15px_40px_rgba(45,18,32,0.35)]">
+      <div className="relative overflow-hidden rounded-[28px] border border-gold/30 bg-gradient-to-br from-[#0B4D3B] via-[#083B2D] to-[#041F17] p-6 sm:p-10 text-ivory shadow-[0_15px_40px_rgba(11,77,59,0.35)]">
         {/* Background glow accents */}
         <div
           aria-hidden
@@ -93,10 +93,10 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
               </span>
             </div>
             <h2 className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-ivory">
-              آراء وتجارب حقيقية من زبوناتنا
+              آراء وتجارب حقيقية من عملائنا
             </h2>
             <p className="mt-2 max-w-xl text-xs sm:text-sm text-ivory/80 leading-relaxed">
-              كل كلمة تُكتب هنا تمثل تجربة حقيقية لزبونة اختارت فيترينا بوتيك. نقرأ آراءكن بامتنان ونعمل دائماً لنكون عند حسن ظنكن.
+              كل كلمة تُكتب هنا تمثل تجربة حقيقية لعميل اختار AVERO MUTAGIM. نقرأ آراءكم بامتنان ونعمل دائماً لنكون عند حسن ظنكم.
             </p>
 
             {avgRating && (
@@ -216,7 +216,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-burgundy px-7 py-3 text-sm font-bold text-ivory shadow-md transition-all hover:bg-burgundy-900 active:scale-[0.98]"
             >
               <PenLine className="size-4" />
-              <span>أضيفي تقييمكِ الآن</span>
+              <span>أضف تقييمك الآن</span>
             </button>
           </div>
         )}
@@ -225,13 +225,13 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
       {/* ───────────── Bottom Brand Signature Quote ───────────── */}
       <div className="mt-14 rounded-3xl border border-gold/30 bg-gradient-to-r from-blush/60 via-white to-blush/60 p-8 text-center shadow-sm">
         <span className="latin font-display text-sm tracking-[0.3em] text-burgundy font-bold uppercase">
-          VETRINA BOUTIQUE
+          AVERO MUTAGIM
         </span>
         <p className="mt-2 text-lg sm:text-2xl font-bold text-burgundy">
-          ثقتكن فينا أجمل تفاصيل حكايتنا 💗
+          ثقتكم بنا سر تميزنا وأناقتكم غايتنا 👑
         </p>
         <p className="mt-2 text-xs sm:text-sm text-muted">
-          شكراً لكل زبونة تشاركنا فرحتها وأناقتها بقطع فيترينا المميزة
+          شكراً لكل عميل يشاركنا تجربته بقطع AVERO MUTAGIM الفاخرة
         </p>
       </div>
 
@@ -259,14 +259,14 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
               <div className="flex items-center gap-2">
                 <span className="size-2 rounded-full bg-gold" />
                 <span className="text-xs font-bold uppercase tracking-wider text-mauve">
-                  VETRINA BOUTIQUE
+                  AVERO MUTAGIM
                 </span>
               </div>
               <h3 id="modal-review-title" className="mt-2 text-xl sm:text-2xl font-bold text-burgundy">
-                شاركينا رأيكِ وتجربتكِ
+                شاركنا رأيك وتجربتك
               </h3>
               <p className="mt-1 text-xs text-muted">
-                رأيكِ أمانة نعتز بها ويساعدنا دائماً على تقديم الأفضل والأرقى لكِ.
+                رأيك أمانة نعتز بها ويساعدنا دائماً على تقديم الأفضل والأرقى لك.
               </p>
             </div>
 
@@ -278,7 +278,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
                     id="rev-name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="مثال: ريم أحمد"
+                    placeholder="مثال: أحمد محمد"
                     required
                   />
                 </Field>

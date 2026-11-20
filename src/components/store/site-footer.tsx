@@ -16,11 +16,11 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
         <div className="md:col-span-4">
           <div className="flex items-center gap-3">
             <span className="block size-16 overflow-hidden rounded-full ring-1 ring-gold/40">
-              <Image src="/brand/logo-round.png" alt="شعار VETRINA BOUTIQUE" width={128} height={128} className="size-full object-cover" />
+              <Image src="/brand/logo-round.png" alt="شعار AVERO MUTAGIM" width={128} height={128} className="size-full object-cover" />
             </span>
             <span className="latin leading-none">
-              <span className="block font-display text-2xl tracking-[0.22em]">VETRINA</span>
-              <span className="mt-1.5 block text-[0.65rem] tracking-[0.5em] text-dusty">BOUTIQUE</span>
+              <span className="block font-display text-2xl tracking-[0.22em] font-semibold">AVERO</span>
+              <span className="mt-1.5 block text-[0.65rem] tracking-[0.5em] text-dusty font-medium">MUTAGIM</span>
             </span>
           </div>
           <p className="mt-6 max-w-sm leading-relaxed text-ivory/75">{settings.footer.about}</p>
@@ -43,7 +43,7 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
           </div>
         </div>
 
-        <FooterCol title="تسوّقي" className="md:col-span-2">
+        <FooterCol title="تسوق" className="md:col-span-2">
           <FooterLink href="/shop?sort=new">وصل حديثاً</FooterLink>
           <FooterLink href="/shop?sort=best">الأكثر مبيعاً</FooterLink>
           {categories.slice(0, 5).map((c) => (
@@ -54,31 +54,28 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
         </FooterCol>
         <FooterCol title="المساعدة" className="md:col-span-3">
           <FooterLink href="/about">قصتنا | Our Story</FooterLink>
-          <FooterLink href="/reviews">آراء زبوناتنا</FooterLink>
-          <FooterLink href="/size-guide">دليل المقاسات</FooterLink>
+          <FooterLink href="/reviews">آراء عملائنا</FooterLink>
           <FooterLink href="/track">تتبّع طلبك</FooterLink>
-          <FooterLink href="/policies">التوصيل والاستبدال</FooterLink>
+          <FooterLink href="/policies">الشحن والتوصيل</FooterLink>
         </FooterCol>
-        <FooterCol title="موقع المحل والدوام" className="md:col-span-3">
-          <a
-            href="https://www.google.com/maps?q=32.223977,35.2201582&z=17&hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mb-2 flex items-center gap-2 rounded-xl bg-ivory/10 p-2.5 text-xs text-ivory transition hover:bg-ivory/20"
-          >
-            <MapPin className="size-4 shrink-0 text-dusty" />
-            <span className="flex-1">موقع المحل على خرائط Google</span>
-            <ExternalLink className="size-3 opacity-60 transition group-hover:opacity-100" />
-          </a>
-
+        <FooterCol title="موقع الفرع والدوام" className="md:col-span-3">
           <div className="space-y-1.5 py-1 text-xs">
-            <div className="rounded-lg bg-ivory/5 p-2 border border-ivory/10">
-              <p className="font-semibold text-dusty">الأحد · الإثنين · الأربعاء:</p>
-              <p className="mt-0.5 text-ivory/80">من 3:00 عصراً حتى 8:00 مساءً</p>
+            <div className="rounded-lg bg-ivory/5 p-2.5 border border-ivory/10">
+              <p className="font-semibold text-dusty flex items-center gap-1.5">
+                <MapPin className="size-3.5 text-dusty" />
+                <span>العنوان:</span>
+              </p>
+              <p className="mt-1 text-ivory/90 font-medium">بيان - دير الأسد | البعنة - دير الأسد</p>
+            </div>
+            <div className="rounded-lg bg-ivory/5 p-2.5 border border-ivory/10">
+              <p className="font-semibold text-dusty flex items-center gap-1.5">
+                <Clock className="size-3.5 text-dusty" />
+                <span>أوقات العمل:</span>
+              </p>
+              <p className="mt-1 text-ivory/90">الأحد – الخميس: 10:00 صباحاً – 10:00 مساءً</p>
             </div>
             <div className="rounded-lg bg-ivory/5 p-2 border border-ivory/10">
-              <p className="font-semibold text-dusty">باقي الأيام:</p>
-              <p className="mt-0.5 text-ivory/80">جميع الأوقات (خدمة متواصلة)</p>
+              <p className="text-ivory/80">🚗 شحن إلى جميع أنحاء البلاد | توصيل إلى جميع البلدان</p>
             </div>
           </div>
 

@@ -22,21 +22,21 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
-  title: { default: "VETRINA BOUTIQUE | فيترينا بوتيك", template: "%s | VETRINA BOUTIQUE" },
+  title: { default: "AVERO MUTAGIM | أفيرو موتاجيم", template: "%s | AVERO MUTAGIM" },
   description:
-    "متجر أزياء نسائية راقية في فلسطين: عبايات، بلايز، بناطيل، شالات وأطقم. توصيل مجاني للضفة والقدس وللداخل بـ 30 ₪ والدفع عند الاستلام.",
-  applicationName: "VETRINA BOUTIQUE",
+    "أزياء رجالية وشبابية فاخرة: بدل، قمصان، بناطيل، جاكيتات، كنزات وإكسسوارات راقية من أرقى العلامات التجارية. شحن لجميع أنحاء البلاد وتوصيل لجميع البلدان مع الدفع عند الاستلام.",
+  applicationName: "AVERO MUTAGIM",
   openGraph: {
     type: "website",
     locale: "ar_PS",
-    siteName: "VETRINA BOUTIQUE",
-    images: [{ url: "/brand/og.jpg", width: 1200, height: 630, alt: "VETRINA BOUTIQUE" }],
+    siteName: "AVERO MUTAGIM",
+    images: [{ url: "/brand/og.jpg", width: 1200, height: 630, alt: "AVERO MUTAGIM" }],
   },
   twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#4B1F34",
+  themeColor: "#0B4D3B",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",

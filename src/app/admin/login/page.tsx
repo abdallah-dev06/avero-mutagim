@@ -14,7 +14,7 @@ export default async function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
           <span className="block size-20 overflow-hidden rounded-full ring-1 ring-gold/40">
-            <Image src="/brand/logo-round.png" alt="VETRINA BOUTIQUE" width={160} height={160} priority className="size-full object-cover" />
+            <Image src="/brand/logo-round.png" alt="AVERO MUTAGIM" width={160} height={160} priority className="size-full object-cover" />
           </span>
           <h1 className="mt-5 text-2xl font-medium text-burgundy">لوحة الإدارة</h1>
           <p className="mt-1 text-sm text-muted">للمصرّح لهم فقط</p>

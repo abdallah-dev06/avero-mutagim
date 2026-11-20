@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronDown, Minus, Plus, Ruler, ShoppingBag, Truck } from "lucide-react";
+import { Check, ChevronDown, Minus, Plus, ShoppingBag, Truck } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -9,12 +9,11 @@ import { toast } from "sonner";
 import { addToCart } from "@/app/(store)/actions";
 import { ProductGallery, type GalleryImage } from "@/components/store/product-gallery";
 import { Price } from "@/components/store/price";
-import { SizeChartTable, SizeFinder, type SizeChartData } from "@/components/store/size-guide";
+import type { SizeChartData } from "@/components/store/size-guide";
 import { WishlistButton } from "@/components/store/wishlist-button";
 import { WhatsAppIcon } from "@/components/store/social-icons";
 import { waMeLink } from "@/lib/whatsapp";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { defaultColor, galleryForColor, selectVariant } from "@/lib/variant-selection";
 import { cn } from "@/lib/utils";
 
@@ -77,9 +76,9 @@ export function ProductView({
   const galleryImages = galleryForColor(product.images, colorId);
 
   const isUnpriced = product.price <= 0;
-  const targetPhone = whatsappNumber || "+970599571202";
+  const targetPhone = whatsappNumber || "+972528982522";
   const selectedSizeLabel = effectiveSize ? (effectiveSize === "ONE SIZE" ? "مقاس واحد" : effectiveSize) : "";
-  const inquiryMessage = `مرحباً بوتيك فيترينا 🌸، أود الاستفسار عن توفر وطلب:
+  const inquiryMessage = `مرحباً AVERO MUTAGIM 👑، أود الاستفسار عن توفر وطلب:
 • القطعة: ${product.name}
 ${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `• المقاس: ${selectedSizeLabel}\n` : ""}
 رابط المنتج: ${typeof window !== "undefined" ? window.location.href : ""}`;
@@ -137,7 +136,7 @@ ${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `�
       if (res.ok) {
         setAdded(true);
         setTimeout(() => setAdded(false), 2200);
-        toast.success("أُضيفت إلى سلتك", {
+        toast.success("تمت الإضافة إلى السلة", {
           description: `${product.name} — ${color?.name} / ${variant.size === "ONE SIZE" ? "مقاس واحد" : variant.size}`,
           action: { label: "عرض السلة", onClick: () => router.push("/cart") },
         });
@@ -201,18 +200,8 @@ ${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `�
               المقاس{effectiveSize ? ": " : ""}
               {effectiveSize && <span className="latin font-medium text-burgundy">{sizeName(effectiveSize)}</span>}
             </legend>
-            {chart && !singleSize && (
-              <Dialog>
-                <DialogTrigger className="inline-flex items-center gap-1.5 text-sm text-burgundy underline-offset-4 hover:underline">
-                  <Ruler className="size-4" /> دليل المقاسات
-                </DialogTrigger>
-                <DialogContent title="دليل المقاسات">
-                  <SizeGuidePanel chart={chart} availableSizes={sizes} onPick={(s) => sizes.includes(s) && setSize(s)} />
-                </DialogContent>
-              </Dialog>
-            )}
           </div>
-          <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="اختاري المقاس" aria-invalid={sizeError || undefined}>
+          <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="اختر المقاس" aria-invalid={sizeError || undefined}>
             {sizes.map((s) => {
               const v = colorVariants.find((x) => x.size === s)!;
               const out = v.stock <= 0;
@@ -280,7 +269,7 @@ ${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `�
                   className="flex items-center justify-center gap-2"
                 >
                   <WhatsAppIcon className="size-5 shrink-0" />
-                  <span>استفسري عن السعر والطلب عبر واتساب</span>
+                  <span>استفسر عن السعر والطلب عبر واتساب</span>
                 </a>
               </Button>
               <WishlistButton productId={product.id} initial={wished} withLabel className="h-13 w-full sm:w-auto" />
@@ -307,7 +296,7 @@ ${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `�
                   </motion.span>
                 ) : (
                   <motion.span key="add" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -10, opacity: 0 }} className="flex items-center gap-2">
-                    <ShoppingBag /> {colorStock <= 0 || (variant && variant.stock <= 0) ? "نفدت الكمية" : "أضيفي إلى السلة"}
+                    <ShoppingBag /> {colorStock <= 0 || (variant && variant.stock <= 0) ? "نفدت الكمية" : "أضف إلى السلة"}
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -357,7 +346,7 @@ ${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `�
                   ) : (
                     <>
                       {color?.name}
-                      {effectiveSize ? ` · ${sizeName(effectiveSize)}` : " · اختاري المقاس"}
+                      {effectiveSize ? ` · ${sizeName(effectiveSize)}` : " · اختر المقاس"}
                     </>
                   )}
                 </p>
@@ -375,7 +364,7 @@ ${color?.name ? `• اللون: ${color.name}\n` : ""}${selectedSizeLabel ? `�
                 </Button>
               ) : (
                 <Button onClick={add} loading={pending} disabled={(variant && variant.stock <= 0) || colorStock <= 0} className="shrink-0">
-                  <ShoppingBag /> أضيفي
+                  <ShoppingBag /> أضف
                 </Button>
               )}
             </div>
@@ -402,26 +391,6 @@ function Accordion({ title, children, defaultOpen }: { title: string; children: 
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
-  );
-}
-
-export function SizeGuidePanel({ chart, availableSizes, onPick }: { chart: SizeChartData; availableSizes?: string[]; onPick?: (label: string) => void }) {
-  const [hl, setHl] = React.useState<string | null>(null);
-  return (
-    <div className="space-y-5 p-4 sm:p-6">
-      <SizeFinder
-        chart={chart}
-        availableSizes={availableSizes}
-        onResult={(k) => {
-          setHl(k);
-          if (k) onPick?.(k.split("-")[0]);
-        }}
-      />
-      <SizeChartTable chart={chart} highlight={hl} availableSizes={availableSizes} />
-      <Link href="/size-guide" className={cn(buttonVariants({ variant: "link" }), "text-sm")}>
-        طريقة أخذ القياسات بالتفصيل
-      </Link>
     </div>
   );
 }

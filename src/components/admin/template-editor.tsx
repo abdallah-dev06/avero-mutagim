@@ -14,13 +14,13 @@ export function TemplateEditor({ status, label, initial, fallback }: { status: O
   const [saved, setSaved] = React.useState(initial);
   const [pending, start] = React.useTransition();
   const preview = renderTemplate(body, {
-    name: "سارة أحمد",
-    reference: "VB-ABCD-1234",
+    name: "محمد أحمد",
+    reference: "AV-ABCD-1234",
     status,
     total: 18900,
-    items: [{ productName: "عباية كريب", colorName: "أسود", size: "M", quantity: 1 }],
-    trackingLink: "https://example.com/order/VB-ABCD-1234",
-    store: "VETRINA BOUTIQUE",
+    items: [{ productName: "قميص كلاسيك إيطالي", colorName: "أبيض", size: "L", quantity: 1 }],
+    trackingLink: "https://example.com/order/AV-ABCD-1234",
+    store: "AVERO MUTAGIM",
   });
   return (
     <Card title={label}>

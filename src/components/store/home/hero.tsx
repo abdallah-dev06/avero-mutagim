@@ -29,18 +29,18 @@ function Silk() {
     <svg aria-hidden viewBox="0 0 1440 260" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-[22vh] min-h-28 w-full md:h-[30vh]">
       <defs>
         <linearGradient id="silk-a" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#8B4B65" stopOpacity=".55" />
-          <stop offset="1" stopColor="#4B1F34" stopOpacity=".85" />
+          <stop offset="0" stopColor="#16604B" stopOpacity=".55" />
+          <stop offset="1" stopColor="#0B4D3B" stopOpacity=".85" />
         </linearGradient>
         <linearGradient id="silk-b" x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#6B2a45" />
-          <stop offset=".55" stopColor="#4B1F34" />
-          <stop offset="1" stopColor="#33131F" />
+          <stop offset="0" stopColor="#16604B" />
+          <stop offset=".55" stopColor="#0B4D3B" />
+          <stop offset="1" stopColor="#06281F" />
         </linearGradient>
         <linearGradient id="silk-line" x1="0" x2="1">
-          <stop offset="0" stopColor="#E9C9A8" stopOpacity="0" />
-          <stop offset=".5" stopColor="#E9C9A8" stopOpacity=".9" />
-          <stop offset="1" stopColor="#E9C9A8" stopOpacity="0" />
+          <stop offset="0" stopColor="#D4AF37" stopOpacity="0" />
+          <stop offset=".5" stopColor="#D4AF37" stopOpacity=".9" />
+          <stop offset="1" stopColor="#D4AF37" stopOpacity="0" />
         </linearGradient>
       </defs>
       <motion.path fill="url(#silk-a)" initial={{ d: WAVE_A[0] }} animate={loop(WAVE_A, 9)} />
@@ -58,19 +58,19 @@ function Emblem({ size }: { size: string }) {
         <defs>
           <path id="ring" d="M150 150 m -128 0 a 128 128 0 1 1 256 0 a 128 128 0 1 1 -256 0" />
         </defs>
-        <circle cx="150" cy="150" r="146" fill="none" stroke="#B88A6A" strokeOpacity=".55" strokeWidth="1" />
-        <circle cx="150" cy="150" r="112" fill="none" stroke="#B88A6A" strokeOpacity=".35" strokeWidth=".8" />
-        <text fill="#8B4B65" fontSize="12.5" letterSpacing="6.2" style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}>
-          <textPath href="#ring">VETRINA • BOUTIQUE • PALESTINE • VETRINA • BOUTIQUE • PALESTINE •</textPath>
+        <circle cx="150" cy="150" r="146" fill="none" stroke="#D4AF37" strokeOpacity=".55" strokeWidth="1" />
+        <circle cx="150" cy="150" r="112" fill="none" stroke="#D4AF37" strokeOpacity=".35" strokeWidth=".8" />
+        <text fill="#0B4D3B" fontSize="12" letterSpacing="5.8" style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}>
+          <textPath href="#ring">AVERO • MUTAGIM • MEN'S FASHION • AVERO • MUTAGIM •</textPath>
         </text>
       </svg>
       <motion.div
         initial={{ scale: 0.92, rotate: -6 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ duration: 1.4, ease: EASE }}
-        className="absolute inset-[17%] overflow-hidden rounded-full shadow-[0_30px_60px_-25px_rgb(75_31_52/0.55)] ring-1 ring-gold/50"
+        className="absolute inset-[17%] overflow-hidden rounded-full shadow-[0_30px_60px_-25px_rgb(11_77_59/0.55)] ring-1 ring-gold/50"
       >
-        <Image src="/brand/logo.webp" alt="شعار VETRINA BOUTIQUE" fill priority sizes="(min-width:1024px) 360px, 60vw" className="scale-[1.08] object-cover" />
+        <Image src="/brand/logo.webp" alt="شعار AVERO MUTAGIM" fill priority sizes="(min-width:1024px) 360px, 60vw" className="scale-[1.08] object-cover" />
       </motion.div>
     </div>
   );
@@ -86,7 +86,7 @@ export function Hero({ hero }: { hero: SiteSettings["hero"] }) {
   const fade = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
-    <section ref={ref} className="grain relative isolate overflow-hidden bg-gradient-to-b from-blush via-[#f8eef0] to-ivory" aria-labelledby="hero-title">
+    <section ref={ref} className="grain relative isolate overflow-hidden bg-gradient-to-b from-blush via-[#f7f2e8] to-ivory" aria-labelledby="hero-title">
       {/* soft light blooms */}
       <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 size-[46rem] -translate-x-1/2 rounded-full bg-white/60 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-20 -right-20 size-96 rounded-full bg-dusty/30 blur-3xl" />

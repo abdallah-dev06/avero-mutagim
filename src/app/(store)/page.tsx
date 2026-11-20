@@ -46,7 +46,7 @@ export default async function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <Hero hero={settings.hero} />
-      <MarqueeBand items={[...settings.announcement.messages, "VETRINA BOUTIQUE"]} />
+      <MarqueeBand items={[...settings.announcement.messages, "AVERO MUTAGIM"]} />
       <CategoryShowcase categories={categories.filter((c) => c.isFeatured)} />
       <ProductShowcaseGrid eyebrow="New Arrivals" title="وصل حديثاً" href="/shop?sort=new" products={newArrivals} wishlistIds={cart.wishlistIds} />
       {h.showStory !== false && (settings.story?.enabled ?? true) && (

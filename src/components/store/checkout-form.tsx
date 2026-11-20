@@ -131,7 +131,7 @@ export function CheckoutForm({
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="المدينة" htmlFor="cityId" error={err("cityId")} required>
               <Select id="cityId" {...register("cityId", { onChange: (e) => loadAreas(e.target.value) })} {...aria("cityId")}>
-                <option value="">اختاري المدينة</option>
+                <option value="">اختر المدينة</option>
                 {cities.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}
@@ -141,7 +141,7 @@ export function CheckoutForm({
             </Field>
             <Field label="المنطقة" htmlFor="areaName" error={err("areaName")} required>
               <Select id="areaName" disabled={!cityId || loadingAreas} {...register("areaName")} {...aria("areaName")}>
-                <option value="">{loadingAreas ? "جارٍ التحميل…" : cityId ? "اختاري المنطقة" : "اختاري المدينة أولاً"}</option>
+                <option value="">{loadingAreas ? "جارٍ التحميل…" : cityId ? "اختر المنطقة" : "اختر المدينة أولاً"}</option>
                 {areas.map((a) => (
                   <option key={a.name} value={a.name}>
                     {a.name}

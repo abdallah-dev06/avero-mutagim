@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "قصتنا | Our Story",
   description:
-    "حكاية فيترينا بوتيك: نؤمن أن الأناقة ليست مجرد ملابس نرتديها، بل أسلوب يعبّر عن شخصيتنا وثقة ترافقنا في كل خطوة. لأن الأناقة تبدأ من التفاصيل.",
+    "حكاية AVERO MUTAGIM: علامة تجارية رائدة في عالم الأزياء الرجالية والشبابية تجمع بين الأناقة الكلاسيكية والعصرية، لنقدم أرقى التصاميم والبدل والقمصان والإكسسوارات للرجل العصري.",
   alternates: { canonical: "/about" },
 };
 
@@ -18,9 +18,9 @@ export default async function AboutPage() {
   const settings = await getSettings();
   const story = settings.story;
 
-  const headline = story?.title || "حكاية أناقة تبدأ بكِ";
-  const subheading = story?.subtitle || "لأن الأناقة تبدأ من التفاصيل...";
-  const heroImage = story?.imageUrl || "/demo/abaya-burgundy-1.webp";
+  const headline = story?.title || "الفخامة والأناقة بأسلوبك العصري";
+  const subheading = story?.subtitle || "العلامات التجارية • الجودة • الأسلوب";
+  const heroImage = story?.imageUrl || "/brand/og.jpg";
 
   const paragraphs = (story?.fullStory || "")
     .split("\n\n")
@@ -29,19 +29,19 @@ export default async function AboutPage() {
 
   const brandValues = [
     {
-      title: "أناقة تعكس شخصيتكِ",
-      desc: "نختار تصاميم تجمع بين الفخامة الهادئة والراحة، لتمنحكِ حضوراً راقياً في كل مناسبة وإطلالة يومية.",
+      title: "أناقة تعكس حضورك",
+      desc: "نختار أرقى التصاميم الرجالية والشبابية التي تمنحك حضوراً واثقاً ومميزاً في كل مناسبة وإطلالة يومية.",
       badge: "تصاميم منتقاة",
     },
     {
-      title: "تفاصيل نهتم بها",
-      desc: "من دقة الخياطة ونقاء الأقمشة إلى تنسيق الألوان والتغليف الأنيق، نصنع الفرق في أدق اللمسات.",
+      title: "أصالة وجودة العلامات",
+      desc: "نعتمد أشهر العلامات التجارية وأجود الخامات العالمية من أقمشة وخياطة وتشطيبات استثنائية تدوم.",
       badge: "جودة معتمدة",
     },
     {
-      title: "تجربة تسوق مريحة",
-      desc: "طلب سلس، دليل مقاسات دقيق، دفع نقدي آمن عند الاستلام، ومتابعة ودودة لكل استفساراتكِ.",
-      badge: "خدمة شخصية",
+      title: "شحن وتوصيل لجميع البلدان",
+      desc: "طلب سهل، دفع نقدي آمن عند الاستلام، وتوصيل سريع وموثوق إلى جميع أنحاء البلاد وكافة البلدان.",
+      badge: "خدمة شاملة",
     },
   ];
 
@@ -64,7 +64,7 @@ export default async function AboutPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/70 px-4 py-1.5 shadow-sm backdrop-blur-sm">
               <span className="size-2 rounded-full bg-gold shadow-[0_0_6px_rgba(212,175,55,0.7)]" />
               <span className="latin font-display text-xs uppercase tracking-[0.3em] text-burgundy">
-                VETRINA BOUTIQUE — OUR STORY
+                AVERO MUTAGIM — OUR STORY
               </span>
             </div>
           </Reveal>
@@ -107,10 +107,10 @@ export default async function AboutPage() {
                   {/* Editorial Seal */}
                   <div className="absolute bottom-6 inset-x-6 rounded-2xl border border-white/25 bg-black/45 p-4 text-center text-ivory backdrop-blur-md">
                     <p className="latin font-display text-xs tracking-[0.35em] text-gold uppercase">
-                      Vetrina Boutique
+                      AVERO MUTAGIM
                     </p>
                     <p className="mt-1 text-xs text-ivory/90">
-                      أناقتكِ... بأسلوب يشبهكِ
+                      العلامات التجارية • الجودة • الأسلوب
                     </p>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export default async function AboutPage() {
               <div className="space-y-6 sm:space-y-8">
                 {paragraphs.map((p, idx) => {
                   const isFirst = idx === 0;
-                  const isCallout = p.includes("توصيل");
+                  const isCallout = p.includes("توصيل") || p.includes("شحن");
 
                   if (isCallout) {
                     return (
@@ -148,7 +148,7 @@ export default async function AboutPage() {
                               {p}
                             </p>
                             <p className="mt-2 text-xs text-muted">
-                              توصيل مجاني للضفة الغربية والقدس · مناطق الداخل المحتل (48) بنصف السعر بـ 30 ₪ والدفع نقداً عند الاستلام.
+                              شحن سريع وموثوق إلى جميع أنحاء البلاد ولكافة البلدان والدفع نقداً عند الاستلام.
                             </p>
                           </div>
                         </div>
@@ -182,10 +182,10 @@ export default async function AboutPage() {
                 <div className="border-t border-line/80 pt-8 mt-10">
                   <div className="rounded-2xl border border-gold/30 bg-white p-6 text-center shadow-[var(--shadow-soft)] sm:p-8">
                     <span className="latin font-display text-2xl tracking-[0.25em] text-burgundy sm:text-3xl">
-                      VETRINA BOUTIQUE
+                      AVERO MUTAGIM
                     </span>
                     <p className="mt-3 text-base font-semibold text-gold sm:text-lg">
-                      {story?.quote || "أناقتكِ... بأسلوب يشبهكِ."}
+                      {story?.quote || "العلامات التجارية • الجودة • الأسلوب."}
                     </p>
                     <div className="mx-auto mt-4 h-0.5 w-16 bg-gradient-to-r from-transparent via-gold to-transparent" />
                   </div>

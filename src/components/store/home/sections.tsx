@@ -41,7 +41,7 @@ export function CategoryShowcase({ categories }: { categories: Cat[] }) {
         <Reveal>
           <SectionHeading
             eyebrow="Categories"
-            title="تسوّقي حسب القسم"
+            title="تشكيلات حسب الأقسام"
             action={
               <Link href="/categories" className="group inline-flex items-center gap-1.5 text-sm text-burgundy">
                 كل الأقسام <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
@@ -144,11 +144,11 @@ export function ProductShowcaseGrid({ eyebrow, title, href, products, wishlistId
 
 /* ───────────── Story (Editorial Luxury Preview) ───────────── */
 export function StorySection({
-  title = "حكاية أناقة تبدأ بكِ",
-  text = "في VETRINA BOUTIQUE، نؤمن أن الأناقة ليست مجرد ملابس نرتديها، بل أسلوب يعبّر عن شخصيتنا وثقة ترافقنا في كل خطوة. نختار لكِ تصاميم تجمع بين الرقي والبساطة والراحة، لتجدي ما يشبه ذوقكِ ويعبّر عنكِ.",
+  title = "الفخامة والأناقة بأسلوبك العصري",
+  text = "في AVERO MUTAGIM، نؤمن بأن الأناقة تعكس شخصية الرجل العصري وحضوره المميز. نحرص على انتقاء أرقى الخامات وأحدث صيحات الموضة من أشهر العلامات التجارية لنقدم لك تجربة أزياء استثنائية.",
   eyebrow = "OUR STORY",
   imageUrl = null,
-  imageAlt = "VETRINA BOUTIQUE",
+  imageAlt = "AVERO MUTAGIM",
 }: {
   title?: string;
   text?: string;
@@ -162,13 +162,13 @@ export function StorySection({
   const yParallax = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [30, -30]);
   const ringRotate = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
 
-  const displayImage = imageUrl || "/demo/abaya-burgundy-1.webp";
+  const displayImage = imageUrl || "/brand/og.jpg";
 
   return (
     <section
       ref={ref}
       aria-labelledby="story-heading"
-      className="relative overflow-hidden bg-gradient-to-b from-[#2a111e] via-[#331322] to-[#240d18] py-20 text-ivory md:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-[#06281f] via-[#0b4d3b] to-[#041d16] py-20 text-ivory md:py-32"
     >
       {/* Decorative Golden Concentric Rings */}
       <motion.div
@@ -201,13 +201,13 @@ export function StorySection({
                 </motion.div>
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#240d18]/80 via-transparent to-transparent"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#041d16]/80 via-transparent to-transparent"
                 />
 
                 {/* Subtle Floating Label */}
                 <div className="absolute bottom-5 inset-x-5 flex items-center justify-between rounded-2xl border border-white/15 bg-black/40 px-4 py-2.5 backdrop-blur-md">
-                  <span className="latin font-display text-xs uppercase tracking-[0.25em] text-ivory">
-                    Vetrina Boutique
+                  <span className="latin font-display text-xs uppercase tracking-[0.25em] text-ivory font-semibold">
+                    AVERO MUTAGIM
                   </span>
                   <span className="inline-block size-1.5 rounded-full bg-gold/90" />
                   <span className="text-[11px] text-dusty">إصدارات مختارة</span>
@@ -269,7 +269,7 @@ export function StorySection({
                   href="/about"
                   className="group inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-gradient-to-r from-gold/15 via-gold/10 to-transparent px-7 py-3.5 text-sm font-bold text-ivory shadow-[0_4px_20px_rgba(212,175,55,0.15)] transition-all hover:border-gold hover:bg-gold hover:text-burgundy-950 active:scale-[0.98]"
                 >
-                  <span>اكتشفي حكايتنا</span>
+                  <span>اكتشف حكايتنا</span>
                   <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
                 </Link>
 
@@ -277,7 +277,7 @@ export function StorySection({
                   href="/shop"
                   className="inline-flex items-center gap-2 text-sm text-ivory/70 transition-colors hover:text-ivory"
                 >
-                  <span>تصفّحي الكتالوج</span>
+                  <span>تصفّح الكتالوج</span>
                   <span className="text-xs text-dusty">←</span>
                 </Link>
               </div>
@@ -312,7 +312,7 @@ export function CollectionsSection({ collections }: { collections: Col[] }) {
                   <h3 className="mt-2 text-2xl font-medium md:text-3xl">{c.name}</h3>
                   {c.description && <p className="mt-2 max-w-sm text-sm leading-relaxed text-ivory/80">{c.description}</p>}
                   <span className="mt-4 inline-flex items-center gap-2 border-b border-ivory/40 pb-1 text-sm transition-colors group-hover:border-ivory">
-                    تسوّقي المجموعة <ArrowLeft className="size-4 transition-transform duration-500 group-hover:-translate-x-1" />
+                    استكشف المجموعة <ArrowLeft className="size-4 transition-transform duration-500 group-hover:-translate-x-1" />
                   </span>
                 </div>
               </Link>
@@ -328,9 +328,9 @@ export function CollectionsSection({ collections }: { collections: Col[] }) {
 export function Benefits({ shippingMessage, estimate }: { shippingMessage: string; estimate: string }) {
   const items = [
     { icon: Truck, title: shippingMessage, text: estimate },
-    { icon: Banknote, title: "الدفع عند الاستلام", text: "ادفعي نقداً عند وصول طلبك بكل راحة." },
-    { icon: RefreshCcw, title: "استبدال سهل", text: "تواصلي معنا عبر واتساب لترتيب الاستبدال." },
-    { icon: Gem, title: "جودة مختارة", text: "نفحص كل قطعة قبل تغليفها وإرسالها لك." },
+    { icon: Banknote, title: "الدفع عند الاستلام", text: "ادفع نقداً عند استلام طلبك بكل راحة وأمان." },
+    { icon: RefreshCcw, title: "استبدال سهل وموثوق", text: "تواصل معنا مباشرة عبر واتساب لترتيب أي استبدال." },
+    { icon: Gem, title: "أصالة وجودة العلامات", text: "أرقى الماركات والخامات مفحوصة بدقة لضمان أعلى المعايير." },
   ];
   return (
     <section className="border-y border-line bg-white/60 py-12 md:py-16">
@@ -358,7 +358,7 @@ export function Testimonials({ items }: { items: { id: string; name: string; cit
         <Reveal>
           <SectionHeading
             eyebrow="Kind Words"
-            title="آراء زبوناتنا المميزات 💗"
+            title="آراء وتجارب عملائنا المميزين 👑"
             action={
               <Link href="/reviews" className="group inline-flex items-center gap-1.5 text-sm font-bold text-burgundy">
                 كل الآراء <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
@@ -393,10 +393,10 @@ export function Testimonials({ items }: { items: { id: string; name: string; cit
 
         <Reveal delay={0.2} className="mt-10 text-center">
           <p className="latin font-display text-xs tracking-[0.25em] text-mauve uppercase font-bold">
-            VETRINA BOUTIQUE
+            AVERO MUTAGIM
           </p>
           <p className="mt-1 text-sm sm:text-base font-semibold text-burgundy">
-            ثقتكن فينا أجمل تفاصيل حكايتنا 💗
+            ثقتكم بنا سر تميزنا وأناقتكم غايتنا 👑
           </p>
         </Reveal>
       </div>
@@ -411,9 +411,9 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
     <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-blush/20 to-transparent py-16 md:py-24">
       <div className="container-lux">
         <Reveal className="text-center">
-          <SectionHeading eyebrow="Visit Our Boutique" title="موقع المحل وأوقات الدوام" />
+          <SectionHeading eyebrow="Visit AVERO MUTAGIM" title="موقع الفرع وأوقات الدوام" />
           <p className="mx-auto mt-2 max-w-xl text-sm text-muted sm:text-base">
-            نسعد بزيارتكِ وتجربة أحدث تشكيلات فيترينا بوتيك على أرض الواقع
+            نسعد بزيارتكم واستكشاف أحدث تشكيلات AVERO MUTAGIM الفاخرة على أرض الواقع
           </p>
         </Reveal>
 
@@ -429,7 +429,7 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
                     </span>
                     <div>
                       <h3 className="text-xl font-bold text-burgundy">أوقات العمل والاستقبال</h3>
-                      <p className="text-xs text-muted">جدول استقبال الزبونات في المحل</p>
+                      <p className="text-xs text-muted">جدول استقبال عملائنا في الفرع</p>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700 ring-1 ring-emerald-200">
@@ -439,42 +439,42 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
                 </div>
 
                 <div className="mt-7 space-y-3.5">
-                  {/* Specific Days */}
+                  {/* Working Days */}
                   <div className="rounded-2xl border border-line/80 bg-blush/30 p-4 transition-colors hover:border-dusty">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <Calendar className="size-4 text-burgundy" />
-                        <span className="font-semibold text-burgundy">الأحد · الإثنين · الأربعاء</span>
+                        <span className="font-semibold text-burgundy">الأحد – الخميس</span>
                       </div>
                       <span className="rounded-full bg-burgundy px-3 py-1 text-xs font-bold text-ivory">
-                        3:00 عصراً – 8:00 مساءً
+                        10:00 صباحاً – 10:00 مساءً
                       </span>
                     </div>
                     <p className="mt-1.5 text-xs text-muted">
-                      الفترة المسائية المخصصة لاستقبال الزبونات وتجربة القطع والمقاسات
+                      استقبال العملاء وتجربة أرقى المجموعات والبدل والقمصان
                     </p>
                   </div>
 
-                  {/* Other Days */}
+                  {/* Shipping Info */}
                   <div className="rounded-2xl border border-line/80 bg-ivory p-4 transition-colors hover:border-dusty">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <span className="inline-block size-2 rounded-full bg-gold shadow-[0_0_6px_rgba(212,175,55,0.6)]" />
-                        <span className="font-semibold text-burgundy">باقي الأيام (السبت، الثلاثاء، الخميس، الجمعة)</span>
+                        <span className="font-semibold text-burgundy">خدمة الشحن والتوصيل</span>
                       </div>
                       <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-bold text-gold ring-1 ring-gold/30">
-                        جميع الأوقات
+                        شحن لجميع البلدان
                       </span>
                     </div>
                     <p className="mt-1.5 text-xs text-muted">
-                      متاح في جميع الأوقات واستقبال الاستفسارات والطلبات على مدار الساعة
+                      شحن وتوصيل سريع وموثوق إلى جميع أنحاء البلاد وكافة البلدان والدفع عند الاستلام
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-line/60 pt-5">
-                <span className="text-xs text-muted">أهلاً وسهلاً بكِ في أي وقت</span>
+                <span className="text-xs text-muted">أهلاً وسهلاً بكم في أي وقت</span>
                 <a
                   href={whatsappHref}
                   target="_blank"
@@ -482,7 +482,7 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
                   className="inline-flex items-center gap-2 text-sm font-semibold text-burgundy transition hover:text-mauve"
                 >
                   <WhatsAppIcon className="size-4" />
-                  تأكيد موعد الزيارة عبر واتساب ←
+                  تواصل معنا مباشرة عبر واتساب ←
                 </a>
               </div>
             </div>
@@ -498,8 +498,8 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
                       <MapPin className="size-6" />
                     </span>
                     <div>
-                      <h3 className="text-xl font-bold text-burgundy">موقع المحل</h3>
-                      <p className="text-xs text-muted">فلسطين · إحداثيات: 32°13'26.3"N 35°13'12.6"E</p>
+                      <h3 className="text-xl font-bold text-burgundy">موقع الفرع</h3>
+                      <p className="text-xs text-muted font-medium">بيان - دير الأسد | البعنة - دير الأسد</p>
                     </div>
                   </div>
                 </div>
@@ -507,8 +507,8 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
                 <div className="mt-5 overflow-hidden rounded-2xl border border-line bg-white shadow-inner">
                   <div className="relative aspect-[16/9] w-full bg-blush">
                     <iframe
-                      title="موقع فيترينا بوتيك على خرائط Google"
-                      src="https://maps.google.com/maps?q=32.223977,35.2201582&hl=ar&z=16&output=embed"
+                      title="موقع AVERO MUTAGIM على خرائط Google"
+                      src="https://maps.google.com/maps?q=32.9300,35.2600&hl=ar&z=15&output=embed"
                       width="100%"
                       height="100%"
                       loading="lazy"
@@ -519,15 +519,15 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
               </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-                <span className="text-xs text-muted">انقري لفتح الموقع في تطبيق الخرائط</span>
+                <span className="text-xs text-muted">📍 بيان - دير الأسد | البعنة</span>
                 <a
-                  href={mapUrl}
+                  href="https://www.google.com/maps?q=Deir+al-Asad&hl=ar"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={buttonVariants({ size: "md" })}
                 >
                   <MapPin className="size-4" />
-                  فتح في خرائط Google
+                  فتح الموقع على الخريطة
                   <ExternalLink className="size-3.5 opacity-70" />
                 </a>
               </div>
@@ -541,19 +541,19 @@ export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string
 
 /* ───────────── Social band ───────────── */
 export function SocialBand({ instagramUrl, facebookUrl, whatsappHref }: { instagramUrl: string; facebookUrl: string; whatsappHref: string }) {
-  const handle = instagramUrl.match(/instagram\.com\/([^/?#]+)/)?.[1];
+  const handle = instagramUrl.match(/instagram\.com\/([^/?#]+)/)?.[1] || "avero_mutagim";
   return (
     <section className="relative overflow-hidden bg-blush py-16 md:py-24">
       <div aria-hidden className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full border border-dusty" />
       <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-10 size-80 rounded-full border border-dusty/70" />
       <Reveal className="container-lux relative text-center">
-        <p className="latin font-display text-sm uppercase tracking-[0.4em] text-mauve">Follow the Vitrine</p>
-        <h2 className="mx-auto mt-3 max-w-xl text-3xl font-medium leading-tight text-burgundy md:text-[2.6rem]">شاركينا إطلالتك وتابعي جديدنا أولاً بأول</h2>
-        {handle && <p className="latin mt-3 text-lg text-mauve">@{handle}</p>}
+        <p className="latin font-display text-sm uppercase tracking-[0.4em] text-mauve">AVERO MUTAGIM</p>
+        <h2 className="mx-auto mt-3 max-w-xl text-3xl font-medium leading-tight text-burgundy md:text-[2.6rem]">شاركنا إطلالتك وتابع جديدنا أولاً بأول</h2>
+        {handle && <p className="latin mt-3 text-lg font-semibold text-mauve">@{handle}</p>}
         <div className="mt-8 flex flex-col items-stretch justify-center gap-3 min-[400px]:flex-row min-[400px]:items-center">
           {instagramUrl && (
             <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className={buttonVariants({ size: "lg" })}>
-              <InstagramIcon /> تابعينا على إنستغرام
+              <InstagramIcon /> تابعنا على إنستغرام
             </a>
           )}
           {facebookUrl && (
@@ -562,10 +562,11 @@ export function SocialBand({ instagramUrl, facebookUrl, whatsappHref }: { instag
             </a>
           )}
           <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className={buttonVariants({ size: "lg", variant: "secondary" })}>
-            <WhatsAppIcon /> راسلينا
+            <WhatsAppIcon /> تواصل معنا عبر واتساب
           </a>
         </div>
       </Reveal>
     </section>
   );
 }
+
