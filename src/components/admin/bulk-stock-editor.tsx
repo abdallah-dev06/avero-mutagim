@@ -19,7 +19,7 @@ export function BulkStockEditor({ rows, threshold }: { rows: Row[]; threshold: n
   const changed = Object.entries(edits).filter(([id, v]) => rows.find((r) => r.id === id)?.stock !== v);
 
   const save = () => {
-    if (!reason.trim()) return toast.error("اكتبي سبب التعديل (مثال: جرد، بضاعة جديدة)");
+    if (!reason.trim()) return toast.error("اكتب سبب التعديل (مثال: جرد، بضاعة جديدة)");
     start(async () => {
       const res = await bulkUpdateStock(
         changed.map(([variantId, stock]) => ({ variantId, stock, base: rows.find((r) => r.id === variantId)!.stock })),

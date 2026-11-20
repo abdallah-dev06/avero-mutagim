@@ -43,10 +43,10 @@ function toPayload(s: EditorState): ProductPayload {
 
 function stepErrors(s: EditorState, step: number): string[] {
   const e: string[] = [];
-  if (step === 0 && s.name.trim().length < 2) e.push("اكتبي اسم المنتج");
+  if (step === 0 && s.name.trim().length < 2) e.push("اكتب اسم المنتج");
   if (step === 1) {
     const p = Number(s.price);
-    if (!s.price || !Number.isFinite(p) || p <= 0) e.push("أدخلي سعراً صحيحاً بالشيكل");
+    if (!s.price || !Number.isFinite(p) || p <= 0) e.push("أدخل سعراً صحيحاً بالشيكل");
     if (s.salePrice.trim() && !(Number(s.salePrice) > 0 && Number(s.salePrice) < p)) e.push("سعر الخصم يجب أن يكون أقل من السعر الأصلي");
   }
   if (step === 3) {
@@ -564,7 +564,7 @@ function StepPublish({ s, update, collections, sizeCharts }: StepProps & { colle
           {(["DRAFT", "PUBLISHED"] as const).map((st) => (
             <label key={st} className={cn("flex cursor-pointer items-center gap-3 rounded-xl border p-3 text-sm", s.status === st ? "border-burgundy bg-blush/50" : "border-line")}>
               <input type="radio" name="status" checked={s.status === st} onChange={() => update({ status: st })} className="size-4 accent-burgundy" />
-              {st === "DRAFT" ? "مسودة — غير ظاهر في المتجر" : "منشور — ظاهر للزبونات"}
+              {st === "DRAFT" ? "مسودة — غير ظاهر في المتجر" : "منشور — ظاهر للعملاء"}
             </label>
           ))}
         </fieldset>

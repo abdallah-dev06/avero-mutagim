@@ -70,7 +70,7 @@ export async function deleteProduct(id: string, confirmName: string): Promise<R>
     const user = await requireStaff({ adminOnly: true });
     const p = await prisma.product.findUnique({ where: { id }, include: { images: { select: { storageKey: true } } } });
     if (!p) throw new DomainError("المنتج غير موجود");
-    if (confirmName.trim() !== p.name.trim()) throw new DomainError("اكتبي اسم المنتج كما هو لتأكيد الحذف");
+    if (confirmName.trim() !== p.name.trim()) throw new DomainError("اكتب اسم المنتج كما هو لتأكيد الحذف");
     const ordered = await prisma.orderItem.count({ where: { productId: id } });
     if (ordered > 0) throw new DomainError("هذا المنتج موجود في طلبات سابقة — استخدمي الأرشفة بدلاً من الحذف");
     await prisma.product.delete({ where: { id } });

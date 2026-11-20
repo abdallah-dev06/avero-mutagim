@@ -73,7 +73,7 @@ export function ProductRowActions({ id, name, status, variant = "menu" }: { id: 
           <div className="space-y-4 p-5 text-sm">
             <p>لا يمكن التراجع عن الحذف. المنتجات الموجودة في طلبات سابقة لا تُحذف — استخدمي الأرشفة بدلاً من ذلك.</p>
             <label className="block">
-              <span className="mb-1 block">للتأكيد اكتبي اسم المنتج: «{name}»</span>
+              <span className="mb-1 block">للتأكيد اكتب اسم المنتج: «{name}»</span>
               <Input value={confirmName} onChange={(e) => setConfirmName(e.target.value)} />
             </label>
             <div className="flex justify-end gap-2">

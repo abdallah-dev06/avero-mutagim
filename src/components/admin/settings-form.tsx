@@ -70,7 +70,7 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
                   })
                 }
                 aria-label={`عبارة ${i + 1}`}
-                placeholder="اكتبي العبارة الإعلانية هنا…"
+                placeholder="اكتب العبارة الإعلانية هنا…"
                 className="flex-1"
               />
               <div className="flex items-center gap-1">
@@ -190,7 +190,7 @@ export function SettingsForm({ initial, canEdit }: { initial: SiteSettings; canE
           <Switch label="وصل حديثاً" checked={s.homepage.showNewArrivals} onCheckedChange={(v) => set("homepage", { showNewArrivals: v })} />
           <Switch label="الأكثر طلباً" checked={s.homepage.showBestSellers} onCheckedChange={(v) => set("homepage", { showBestSellers: v })} />
           <Switch label="المجموعات" checked={s.homepage.showCollections} onCheckedChange={(v) => set("homepage", { showCollections: v })} />
-          <Switch label="آراء الزبونات (إن وُجدت)" checked={s.homepage.showTestimonials} onCheckedChange={(v) => set("homepage", { showTestimonials: v })} />
+          <Switch label="آراء العملاء (إن وُجدت)" checked={s.homepage.showTestimonials} onCheckedChange={(v) => set("homepage", { showTestimonials: v })} />
           <Switch label="قسم قصة البوتيك (Our Story)" checked={s.homepage.showStory ?? true} onCheckedChange={(v) => set("homepage", { showStory: v })} />
           <Switch label="موقع المحل وأوقات الدوام" checked={s.homepage.showLocation ?? true} onCheckedChange={(v) => set("homepage", { showLocation: v })} />
         </div>
@@ -401,7 +401,7 @@ export function TestimonialsManager({ items }: { items: T[] }) {
       } else toast.error(r.error);
     });
   return (
-    <Card title="آراء الزبونات">
+    <Card title="آراء العملاء">
       <p className="mb-3 text-xs text-muted">أضيفي آراء حقيقية فقط (بإذن الزبونة). لا يظهر القسم إن لم توجد آراء مفعّلة.</p>
       <ul className="space-y-2">
         {items.map((t) => (

@@ -208,7 +208,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
               كوني أول من يشاركنا رأيها
             </h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted leading-relaxed">
-              لا نضع تقييمات وهمية؛ نعتز بكل تجربة حقيقية من زبوناتنا ونسعد بسماع رأيكِ الصادق في قطعنا وخدمتنا.
+              لا نضع تقييمات وهمية؛ نعتز بكل تجربة حقيقية من عملائنا ونسعد بسماع رأيك الصادق في قطعنا وخدمتنا.
             </p>
             <button
               type="button"
@@ -335,7 +335,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
                   rows={4}
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  placeholder="اكتبي رأيكِ الصادق بكل حرية وراحة…"
+                  placeholder="اكتب رأيك الصادق بكل حرية وراحة…"
                   required
                 />
               </Field>

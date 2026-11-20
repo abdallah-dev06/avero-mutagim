@@ -59,7 +59,7 @@ export function AnnouncementBar({
     return (
       <span className="inline-flex items-center gap-1.5">
         {hasLeadingDot && (
-          <span className="text-[#D9A6B6] text-[10px] select-none" aria-hidden="true">
+          <span className="text-gold text-[10px] select-none" aria-hidden="true">
             ●
           </span>
         )}
@@ -72,7 +72,7 @@ export function AnnouncementBar({
     <aside
       role="region"
       aria-label="شريط الإعلانات التسويقية"
-      className="group relative z-40 w-full overflow-hidden border-b border-[#3b1728] bg-[#4B1F34] text-[#F9F6F4] select-none"
+      className="group relative z-40 w-full overflow-hidden border-b border-[#06281f] bg-[#083b2d] text-[#FAF7F0] select-none"
     >
       <div className="pt-safe" />
       <div className="relative flex h-9 sm:h-10 items-center overflow-hidden">
@@ -89,7 +89,7 @@ export function AnnouncementBar({
               <span>{renderMessageContent(msg)}</span>
               <span
                 aria-hidden="true"
-                className="inline-block size-1.5 rounded-full bg-[#D9A6B6] shadow-[0_0_8px_rgba(217,166,182,0.85)]"
+                className="inline-block size-1.5 rounded-full bg-gold shadow-[0_0_8px_rgba(212,175,55,0.7)]"
               />
             </span>
           ))}

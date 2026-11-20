@@ -46,13 +46,15 @@ export function SiteHeader({
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
         "sticky top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-500",
-        scrolled ? "border-line/80 bg-ivory/85 shadow-[0_8px_30px_-20px_rgb(75_31_52/0.35)] backdrop-blur-xl" : "border-transparent bg-ivory/60 backdrop-blur-md",
+        scrolled
+          ? "border-[#06281f] bg-[#0B4D3B]/95 text-ivory shadow-[0_10px_35px_-15px_rgba(6,40,31,0.6)] backdrop-blur-xl"
+          : "border-[#083b2d] bg-[#0B4D3B] text-ivory shadow-[0_4px_20px_-10px_rgba(6,40,31,0.35)]",
       )}
     >
       <div className={cn("container-lux flex items-center justify-between gap-3 transition-[height] duration-500", scrolled ? "h-16" : "h-[4.5rem]")}>
         <div className="flex items-center gap-1.5">
           <Dialog open={menuOpen} onOpenChange={setMenuOpen}>
-            <DialogTrigger className="grid size-11 place-items-center rounded-full text-burgundy transition hover:bg-blush lg:hidden" aria-label="فتح القائمة">
+            <DialogTrigger className="grid size-11 place-items-center rounded-full text-ivory transition hover:text-gold hover:bg-white/10 lg:hidden" aria-label="فتح القائمة">
               <Menu className="size-[22px]" strokeWidth={1.6} />
             </DialogTrigger>
             <SheetContent side="right" title="القائمة">
@@ -82,7 +84,7 @@ export function SiteHeader({
               </nav>
             </SheetContent>
           </Dialog>
-          <Logo priority size={scrolled ? 40 : 46} />
+          <Logo priority size={scrolled ? 40 : 46} inverse />
         </div>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="الأقسام">
@@ -121,14 +123,14 @@ function DesktopLink({ href, children, active }: { href: string; children: React
     <Link
       href={href}
       className={cn(
-        "group relative px-3.5 py-2 text-[0.95rem] text-ink transition-colors hover:text-burgundy",
-        active && "text-burgundy",
+        "group relative px-3.5 py-2 text-[0.95rem] font-medium text-ivory/90 transition-colors hover:text-gold",
+        active && "text-gold font-semibold",
       )}
     >
       {children}
       <span
         className={cn(
-          "absolute inset-x-3.5 -bottom-0.5 h-px origin-center scale-x-0 bg-mauve transition-transform duration-500 ease-[var(--ease-lux)] group-hover:scale-x-100",
+          "absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-center scale-x-0 bg-gold transition-transform duration-500 ease-[var(--ease-lux)] group-hover:scale-x-100",
           active && "scale-x-100",
         )}
       />
@@ -147,7 +149,7 @@ function MobileLink({ href, children, sub }: { href: string; children: React.Rea
 
 function IconLink({ href, label, count, children, className }: { href: string; label: string; count?: number; children: React.ReactNode; className?: string }) {
   return (
-    <Link href={href} aria-label={count ? `${label} (${count})` : label} className={cn("relative grid size-11 place-items-center rounded-full text-burgundy transition hover:bg-blush", className)}>
+    <Link href={href} aria-label={count ? `${label} (${count})` : label} className={cn("relative grid size-11 place-items-center rounded-full text-ivory transition hover:text-gold hover:bg-white/10", className)}>
       {children}
       {!!count && (
         <motion.span
@@ -155,7 +157,7 @@ function IconLink({ href, label, count, children, className }: { href: string; l
           initial={{ scale: 0.4 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 500, damping: 18 }}
-          className="absolute top-1 left-1 grid min-w-[18px] place-items-center rounded-full bg-burgundy px-1 text-[10px] font-bold leading-[18px] text-ivory"
+          className="absolute top-1 left-1 grid min-w-[18px] place-items-center rounded-full bg-gold px-1 text-[10px] font-bold leading-[18px] text-burgundy-900 shadow-sm"
         >
           {count > 99 ? "99+" : count}
         </motion.span>
@@ -177,15 +179,15 @@ export function SearchButton({ variant = "icon" }: { variant?: "icon" | "nav" })
     <D.Root open={open} onOpenChange={setOpen}>
       <D.Trigger
         aria-label="بحث"
-        className={variant === "icon" ? "grid size-11 place-items-center rounded-full text-burgundy transition hover:bg-blush" : "flex flex-col items-center gap-1"}
+        className={variant === "icon" ? "grid size-11 place-items-center rounded-full text-ivory transition hover:text-gold hover:bg-white/10" : "flex flex-col items-center gap-1 text-ivory"}
       >
         <Search className="size-[21px]" strokeWidth={1.6} />
       </D.Trigger>
       <D.Portal>
-        <D.Overlay className="fixed inset-0 z-50 bg-burgundy-900/30 backdrop-blur-sm data-[state=open]:animate-[fade-in_.25s_ease]" />
+        <D.Overlay className="fixed inset-0 z-50 bg-burgundy-900/40 backdrop-blur-sm data-[state=open]:animate-[fade-in_.25s_ease]" />
         <D.Content className="fixed inset-x-0 top-0 z-50 bg-ivory px-4 pb-8 pt-[max(1rem,env(safe-area-inset-top))] shadow-[var(--shadow-lift)] outline-none data-[state=open]:animate-[fade-in_.3s_ease] sm:px-8">
           <D.Title className="sr-only">البحث في المتجر</D.Title>
-          <D.Description className="sr-only">اكتبي اسم المنتج أو القسم أو اللون</D.Description>
+          <D.Description className="sr-only">ابحث عن اسم المنتج، القسم، أو اللون</D.Description>
           <form onSubmit={submit} className="mx-auto mt-2 flex max-w-2xl items-center gap-2 border-b-2 border-burgundy/80 pb-2" role="search">
             <Search className="size-6 shrink-0 text-mauve" strokeWidth={1.5} aria-hidden />
             <input
@@ -194,14 +196,14 @@ export function SearchButton({ variant = "icon" }: { variant?: "icon" | "nav" })
               onChange={(e) => setQ(e.target.value)}
               type="search"
               enterKeyHint="search"
-              placeholder="ابحثي عن عباية، بلوزة، لون…"
+              placeholder="ابحث عن بدلة، قميص، جاكيت، بنطال…"
               aria-label="كلمة البحث"
               className="min-w-0 flex-1 bg-transparent py-2 text-lg text-ink outline-none placeholder:text-muted/70 sm:text-xl"
             />
             <D.Close className="shrink-0 rounded-full px-3 py-2 text-sm text-muted hover:bg-blush">إلغاء</D.Close>
           </form>
           <div className="mx-auto mt-5 flex max-w-2xl flex-wrap gap-2">
-            {["عبايات", "بلايز", "شالات", "أطقم", "أسود", "بيج"].map((t) => (
+            {["بدل", "قمصان", "بناطيل", "جاكيتات", "كنزات", "إكسسوارات"].map((t) => (
               <button
                 key={t}
                 type="button"

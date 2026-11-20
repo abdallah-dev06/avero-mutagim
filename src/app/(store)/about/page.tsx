@@ -93,7 +93,7 @@ export default async function AboutPage() {
                 <div className="arch relative aspect-[3/4] w-full overflow-hidden rounded-t-[140px] rounded-b-[32px] border border-gold/30 bg-blush shadow-[0_20px_50px_rgba(75,31,52,0.15)] ring-1 ring-burgundy/10">
                   <Image
                     src={heroImage}
-                    alt={story?.imageAlt || "قصتنا - فيترينا بوتيك"}
+                    alt={story?.imageAlt || "قصتنا - AVERO MUTAGIM"}
                     fill
                     priority
                     sizes="(min-width: 1024px) 38vw, 90vw"
@@ -207,7 +207,7 @@ export default async function AboutPage() {
               قيمٌ نعتز بها في كل قطعة
             </h2>
             <p className="mx-auto mt-2 max-w-lg text-sm text-muted">
-              نضع معايير عالية لنضمن لكِ تجربة استثنائية من الاختيار حتى الوصول
+              نضع معايير عالية لنضمن لك تجربة استثنائية من الاختيار حتى الوصول
             </p>
           </Reveal>
 
@@ -265,13 +265,13 @@ export default async function AboutPage() {
 
           <Reveal delay={0.1}>
             <h2 className="mt-5 text-3xl font-medium tracking-tight text-ivory sm:text-4xl md:text-5xl">
-              إطلالتكِ القادمة بانتظاركِ
+              إطلالتك القادمة بانتظارك
             </h2>
           </Reveal>
 
           <Reveal delay={0.18}>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ivory/80 sm:text-base">
-              اكتشفي تشكيلة العبايات، البلايز، الأطقم والشالات المصممة لتمنحكِ أسلوباً يشبهكِ بكل فخامة وبساطة.
+              اكتشف تشكيلة البدل، القمصان، البناطيل والجاكيتات الفاخرة المصممة لتمنحك أسلوباً يعكس هيبتك وأناقتك.
             </p>
           </Reveal>
 
@@ -281,7 +281,7 @@ export default async function AboutPage() {
                 href="/shop"
                 className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#f3e5ab] via-[#dfb652] to-[#b88a6a] px-8 py-4 text-base font-bold text-burgundy-950 shadow-[0_8px_30px_rgba(212,175,55,0.35)] transition-all hover:brightness-105 active:scale-[0.98]"
               >
-                <span>تسوّقي الآن</span>
+                <span>تسوّق الآن</span>
                 <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
               </Link>
 

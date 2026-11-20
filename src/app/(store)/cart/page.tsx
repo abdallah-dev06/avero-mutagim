@@ -22,10 +22,10 @@ export default async function CartPage() {
         <EmptyState
           icon={<ShoppingBag />}
           title="سلتك فارغة"
-          description="اكتشفي تشكيلتنا وأضيفي ما يعجبك."
+          description="اكتشف تشكيلتنا وأضف ما يناسبك."
           action={
             <Link href="/shop" className={buttonVariants()}>
-              ابدئي التسوق
+              ابدأ التسوق
             </Link>
           }
         />

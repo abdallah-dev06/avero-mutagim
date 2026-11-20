@@ -4,8 +4,8 @@ import { normalizePhone } from "@/lib/phone";
 export const phoneSchema = z
   .string()
   .trim()
-  .min(9, "أدخلي رقم هاتف صحيح")
-  .max(20, "أدخلي رقم هاتف صحيح")
+  .min(9, "أدخل رقم هاتف صحيح")
+  .max(20, "أدخل رقم هاتف صحيح")
   .refine((v) => normalizePhone(v) !== null, "رقم الهاتف غير صحيح — مثال: 0599 123 456");
 
 export const checkoutSchema = z.object({
@@ -22,7 +22,7 @@ export type CheckoutInput = z.infer<typeof checkoutSchema>;
 
 export const loginSchema = z.object({
   email: z.string().trim().toLowerCase().email("البريد الإلكتروني غير صحيح").max(120),
-  password: z.string().min(1, "أدخلي كلمة المرور").max(200),
+  password: z.string().min(1, "أدخل كلمة المرور").max(200),
 });
 
 export const registerSchema = z.object({
