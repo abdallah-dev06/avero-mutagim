@@ -408,7 +408,7 @@ export function Testimonials({ items }: { items: { id: string; name: string; cit
 export function BoutiqueLocationSection({ whatsappHref }: { whatsappHref: string }) {
   const mapUrl = "https://www.google.com/maps?q=32.223977,35.2201582&z=17&hl=en";
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-transparent via-blush/20 to-transparent py-16 md:py-24">
+    <section id="location" className="relative overflow-hidden bg-gradient-to-b from-transparent via-blush/20 to-transparent py-16 md:py-24">
       <div className="container-lux">
         <Reveal className="text-center">
           <SectionHeading eyebrow="Visit AVERO MUTAGIM" title="موقع الفرع وأوقات الدوام" />

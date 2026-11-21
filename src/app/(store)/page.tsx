@@ -47,6 +47,39 @@ export default async function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <Hero hero={settings.hero} />
       <MarqueeBand items={[...settings.announcement.messages, "AVERO MUTAGIM"]} />
+      {categories.length === 0 && newArrivals.length === 0 && (
+        <section className="py-12 md:py-16">
+          <div className="container-lux text-center">
+            <div className="mx-auto max-w-2xl rounded-[32px] border border-gold/40 bg-gradient-to-br from-ivory via-white to-blush p-8 md:p-12 shadow-[var(--shadow-soft)]">
+              <span className="latin font-display text-xs font-semibold tracking-[0.3em] text-mauve uppercase">
+                AVERO MUTAGIM • MEN&apos;S LUXURY FASHION
+              </span>
+              <h2 className="mt-4 text-2xl font-bold text-burgundy sm:text-3xl md:text-4xl">
+                التشكيلة الجديدة قيد الإعداد
+              </h2>
+              <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
+                نعمل حالياً على تجهيز وإضافة أحدث تشكيلات الأزياء والبدل والقمصان الإيطالية الراقية للمتجر. يسعدنا استقبالكم في فرعنا أو التواصل المباشر عبر واتساب للاطلاع على المتوفر وتجهيز طلبكم فوراً.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href={waMeLink(settings.business.whatsappNumber, "مرحباً AVERO MUTAGIM 👑، أود الاستفسار عن التشكيلة المتوفرة لديكم.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-burgundy px-7 py-3 text-sm font-bold text-ivory shadow-md transition hover:bg-burgundy-900"
+                >
+                  تواصل عبر واتساب
+                </a>
+                <a
+                  href="#location"
+                  className="inline-flex items-center gap-2 rounded-full border border-burgundy/30 bg-transparent px-7 py-3 text-sm font-bold text-burgundy transition hover:bg-blush"
+                >
+                  موقع الفرع
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
       <CategoryShowcase categories={categories.filter((c) => c.isFeatured)} />
       <ProductShowcaseGrid eyebrow="New Arrivals" title="وصل حديثاً" href="/shop?sort=new" products={newArrivals} wishlistIds={cart.wishlistIds} />
       {h.showStory !== false && (settings.story?.enabled ?? true) && (

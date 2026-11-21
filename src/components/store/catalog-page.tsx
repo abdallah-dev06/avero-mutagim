@@ -108,7 +108,7 @@ export async function CatalogPage({
             <EmptyState
               icon={<SearchX />}
               title="لا توجد منتجات مطابقة"
-              description="جرّبي تعديل الفلاتر أو البحث بكلمة أخرى."
+              description="جرّب تعديل الفلاتر أو البحث بكلمة أخرى."
               action={
                 <Link href={basePath} className={buttonVariants({ variant: "secondary" })}>
                   مسح الفلاتر

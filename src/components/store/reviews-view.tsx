@@ -52,7 +52,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
       });
 
       if (res.ok) {
-        toast.success("شكراً لمشاركتكِ رأيكِ القيّم! تم نشر تقييمكِ بنجاح 🤍");
+        toast.success("شكراً لمشاركتك رأيك القيّم! تم نشر تقييمك بنجاح 👑");
         setModalOpen(false);
         setName("");
         setCity("");
@@ -128,7 +128,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
               className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#f3e5ab] via-[#dfb652] to-[#b88a6a] px-6 sm:px-8 py-3.5 text-sm sm:text-base font-bold text-burgundy-950 shadow-[0_6px_25px_rgba(212,175,55,0.3)] transition-all hover:brightness-105 active:scale-[0.98]"
             >
               <PenLine className="size-4 transition-transform group-hover:rotate-12" />
-              <span>شاركينا تجربتكِ</span>
+              <span>شاركنا تجربتك</span>
             </button>
           </div>
         </div>
@@ -205,7 +205,7 @@ export function ReviewsView({ initialReviews }: { initialReviews: ReviewItem[] }
               <MessageSquareHeart className="size-8" />
             </span>
             <h3 className="mt-5 text-xl sm:text-2xl font-bold text-burgundy">
-              كوني أول من يشاركنا رأيها
+              كن أول من يشاركنا تجربته
             </h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted leading-relaxed">
               لا نضع تقييمات وهمية؛ نعتز بكل تجربة حقيقية من عملائنا ونسعد بسماع رأيك الصادق في قطعنا وخدمتنا.

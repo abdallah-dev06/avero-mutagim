@@ -64,12 +64,16 @@ export function SiteHeader({
                 <MobileLink href="/reviews">آراء عملائنا</MobileLink>
                 <MobileLink href="/shop?sort=new">وصل حديثاً</MobileLink>
                 <MobileLink href="/shop">كل المنتجات</MobileLink>
-                <p className="mt-5 mb-1 text-xs font-medium tracking-wide text-muted">الأقسام</p>
-                {categories.map((c) => (
-                  <MobileLink key={c.slug} href={`/category/${c.slug}`} sub={c.nameEn}>
-                    {c.name}
-                  </MobileLink>
-                ))}
+                {categories.length > 0 && (
+                  <>
+                    <p className="mt-5 mb-1 text-xs font-medium tracking-wide text-muted">الأقسام</p>
+                    {categories.map((c) => (
+                      <MobileLink key={c.slug} href={`/category/${c.slug}`} sub={c.nameEn}>
+                        {c.name}
+                      </MobileLink>
+                    ))}
+                  </>
+                )}
                 <div className="hairline my-5" />
                 <MobileLink href="/track">تتبّع طلبك</MobileLink>
                 <MobileLink href="/policies">الشحن والتوصيل</MobileLink>

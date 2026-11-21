@@ -14,19 +14,26 @@ export default async function CategoriesPage() {
         <p className="latin font-display text-xs uppercase tracking-[0.35em] text-mauve">Categories</p>
         <h1 className="mt-2 text-3xl font-medium text-burgundy md:text-5xl">الأقسام</h1>
       </header>
-      <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
-        {categories.map((c, i) => (
-          <Reveal key={c.id} delay={i * 0.05}>
-            <Link href={`/category/${c.slug}`} className="group block">
-              <div className="arch relative aspect-[3/4] overflow-hidden bg-blush">
-                {c.imageUrl && <Image src={c.imageUrl} alt={c.name} fill sizes="(min-width:1024px) 20vw, 50vw" className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-lux)] group-hover:scale-105" />}
-              </div>
-              <h2 className="mt-3 text-center text-lg font-medium text-burgundy">{c.name}</h2>
-              <p className="text-center text-xs text-muted">{c._count.products} منتج</p>
-            </Link>
-          </Reveal>
-        ))}
-      </div>
+      {categories.length > 0 ? (
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
+          {categories.map((c, i) => (
+            <Reveal key={c.id} delay={i * 0.05}>
+              <Link href={`/category/${c.slug}`} className="group block">
+                <div className="arch relative aspect-[3/4] overflow-hidden bg-blush">
+                  {c.imageUrl && <Image src={c.imageUrl} alt={c.name} fill sizes="(min-width:1024px) 20vw, 50vw" className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-lux)] group-hover:scale-105" />}
+                </div>
+                <h2 className="mt-3 text-center text-lg font-medium text-burgundy">{c.name}</h2>
+                <p className="text-center text-xs text-muted">{c._count.products} منتج</p>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      ) : (
+        <div className="mx-auto max-w-md rounded-3xl border border-dashed border-line bg-white/60 p-10 text-center">
+          <p className="text-lg font-medium text-burgundy">سيتم إضافة الأقسام قريباً</p>
+          <p className="mt-2 text-sm text-muted">جاري تجهيز أقسام التشكيلة الجديدة في المتجر.</p>
+        </div>
+      )}
       {collections.length > 0 && (
         <>
           <h2 className="mb-6 mt-16 text-center text-2xl font-medium text-burgundy">المجموعات</h2>

@@ -4,7 +4,7 @@ import { CatalogPage, parseListParams } from "@/components/store/catalog-page";
 export async function generateMetadata({ searchParams }: PageProps<"/shop">): Promise<Metadata> {
   const sp = await searchParams;
   const q = typeof sp.q === "string" ? sp.q : null;
-  return { title: q ? `نتائج البحث: ${q}` : "تسوّقي كل المنتجات", alternates: { canonical: "/shop" }, robots: q ? { index: false } : undefined };
+  return { title: q ? `نتائج البحث: ${q}` : "تسوّق كل المنتجات", alternates: { canonical: "/shop" }, robots: q ? { index: false } : undefined };
 }
 
 export default async function ShopPage({ searchParams }: PageProps<"/shop">) {
