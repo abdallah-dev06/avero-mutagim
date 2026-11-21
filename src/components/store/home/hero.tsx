@@ -93,7 +93,23 @@ export function Hero({ hero }: { hero: SiteSettings["hero"] }) {
 
       <div className="container-lux relative grid min-h-[calc(100svh-7.5rem)] items-center gap-6 pb-[24vh] pt-8 md:pb-[30vh] lg:min-h-[min(calc(100svh-7.5rem),900px)] lg:grid-cols-2 lg:gap-12 lg:pt-4">
         <motion.div style={{ y: visualY, scale: visualScale, opacity: fade }} className="order-1 flex justify-center lg:order-2">
-          {hero.imageUrl ? (
+          {hero.videoUrl ? (
+            <div className="relative w-[min(78vw,430px)]">
+              <motion.div
+                initial={{ clipPath: "inset(100% 0 0 0 round 999px 999px 24px 24px)" }}
+                animate={{ clipPath: "inset(0% 0 0 0 round 999px 999px 24px 24px)" }}
+                transition={{ duration: 1.5, ease: EASE }}
+                className="relative aspect-[3/4] overflow-hidden rounded-t-[140px] rounded-b-[24px] border border-gold/40 shadow-[0_25px_60px_-15px_rgba(11,77,59,0.35)]"
+              >
+                <video autoPlay loop muted playsInline className="size-full object-cover">
+                  <source src={hero.videoUrl} type="video/mp4" />
+                </video>
+              </motion.div>
+              <div className="absolute -bottom-8 -left-6 w-28 sm:w-36">
+                <Emblem size="w-full" />
+              </div>
+            </div>
+          ) : hero.imageUrl ? (
             <div className="relative w-[min(78vw,430px)]">
               <motion.div
                 initial={{ clipPath: "inset(100% 0 0 0 round 999px 999px 24px 24px)" }}

@@ -89,6 +89,7 @@ export default async function HomePage() {
           eyebrow={settings.story?.eyebrow || "OUR STORY"}
           imageUrl={settings.story?.imageUrl}
           imageAlt={settings.story?.imageAlt}
+          videoUrl={settings.story?.videoUrl || "/brand/avero-story.mp4"}
         />
       )}
       <ProductRail eyebrow="Best Sellers" title="الأكثر طلباً" href="/shop?sort=best" products={bestSellers} wishlistIds={cart.wishlistIds} />

@@ -149,12 +149,14 @@ export function StorySection({
   eyebrow = "OUR STORY",
   imageUrl = null,
   imageAlt = "AVERO MUTAGIM",
+  videoUrl = "/brand/avero-story.mp4",
 }: {
   title?: string;
   text?: string;
   eyebrow?: string;
   imageUrl?: string | null;
   imageAlt?: string;
+  videoUrl?: string | null;
 }) {
   const ref = React.useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
@@ -191,13 +193,26 @@ export function StorySection({
               {/* Outer arch frame with golden stroke */}
               <div className="arch relative aspect-[3/4] overflow-hidden rounded-t-[120px] rounded-b-[32px] border border-gold/30 bg-blush/20 shadow-[0_20px_50px_rgba(0,0,0,0.45)] ring-1 ring-white/10 sm:rounded-t-[140px]">
                 <motion.div style={{ y: yParallax }} className="relative h-[115%] w-full -top-[7%]">
-                  <Image
-                    src={displayImage}
-                    alt={imageAlt || title}
-                    fill
-                    sizes="(min-width: 1024px) 38vw, 85vw"
-                    className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-lux)] hover:scale-105"
-                  />
+                  {videoUrl ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster={displayImage}
+                      className="size-full object-cover transition-transform duration-[1.4s] ease-[var(--ease-lux)] hover:scale-105"
+                    >
+                      <source src={videoUrl} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <Image
+                      src={displayImage}
+                      alt={imageAlt || title}
+                      fill
+                      sizes="(min-width: 1024px) 38vw, 85vw"
+                      className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-lux)] hover:scale-105"
+                    />
+                  )}
                 </motion.div>
                 <div
                   aria-hidden

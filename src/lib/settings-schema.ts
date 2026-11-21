@@ -16,6 +16,7 @@ export const siteSettingsSchema = z.object({
     secondaryCta: link,
     imageUrl: z.string().trim().max(500).nullable(),
     imageAlt: z.string().trim().max(160),
+    videoUrl: z.string().trim().max(500).nullable().default(null),
   }),
   business: z.object({
     name: z.string().trim().min(1).max(80),
@@ -59,6 +60,7 @@ export const siteSettingsSchema = z.object({
       quote: z.string().trim().max(200).default("العلامات التجارية • الجودة • الأسلوب"),
       imageUrl: z.string().trim().max(500).nullable().default(null),
       imageAlt: z.string().trim().max(160).default("AVERO MUTAGIM Men's Fashion"),
+      videoUrl: z.string().trim().max(500).nullable().default("/brand/avero-story.mp4"),
     })
     .default({
       enabled: true,
@@ -72,6 +74,7 @@ export const siteSettingsSchema = z.object({
       quote: "العلامات التجارية • الجودة • الأسلوب",
       imageUrl: null,
       imageAlt: "AVERO MUTAGIM Men's Fashion",
+      videoUrl: "/brand/avero-story.mp4",
     }),
   footer: z.object({
     about: z.string().trim().max(400),
@@ -131,6 +134,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     secondaryCta: { label: "تصفح الأقسام", href: "/categories" },
     imageUrl: null,
     imageAlt: "AVERO MUTAGIM Men's Fashion",
+    videoUrl: null,
   },
   business: {
     name: "AVERO MUTAGIM",
@@ -172,6 +176,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     quote: "العلامات التجارية • الجودة • الأسلوب.",
     imageUrl: null,
     imageAlt: "AVERO MUTAGIM Men's Fashion",
+    videoUrl: null,
   },
   footer: {
     about: "العلامات التجارية • الجودة • الأسلوب. وجهتك الأولى للأزياء الرجالية والشبابية الفاخرة، مع شحن سريع وتوصيل لجميع البلدان.",

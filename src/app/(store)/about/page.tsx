@@ -91,14 +91,16 @@ export default async function AboutPage() {
             <Reveal className="lg:col-span-5">
               <div className="sticky top-28 mx-auto max-w-md lg:max-w-none">
                 <div className="arch relative aspect-[3/4] w-full overflow-hidden rounded-t-[140px] rounded-b-[32px] border border-gold/30 bg-blush shadow-[0_20px_50px_rgba(75,31,52,0.15)] ring-1 ring-burgundy/10">
-                  <Image
-                    src={heroImage}
-                    alt={story?.imageAlt || "قصتنا - AVERO MUTAGIM"}
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 38vw, 90vw"
-                    className="object-cover transition-transform duration-[1.6s] ease-[var(--ease-lux)] hover:scale-105"
-                  />
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={heroImage}
+                    className="size-full object-cover transition-transform duration-[1.6s] ease-[var(--ease-lux)] hover:scale-105"
+                  >
+                    <source src="/brand/avero-story.mp4" type="video/mp4" />
+                  </video>
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 bg-gradient-to-t from-burgundy/60 via-transparent to-transparent"
