@@ -88,37 +88,36 @@ export function SiteFooter({ settings, categories }: { settings: SiteSettings; c
         </FooterCol>
       </div>
       <div className="border-t border-ivory/15 bg-burgundy/90">
-        <div className="container-lux flex flex-col items-center justify-between gap-4 py-7 text-center sm:flex-row sm:text-start">
-          <div className="flex flex-col items-center gap-2 sm:items-start">
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
-              <a
-                href="https://www.instagram.com/ay.dev06"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Instagram: @ay.dev06"
-                className="latin text-sm font-bold tracking-wide text-dusty transition-colors hover:text-gold hover:underline sm:text-base"
-              >
-                Design & Development © 2026 | Abdallah Yaser
-              </a>
-
-              <a
-                href="https://wa.me/972595873328"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="WhatsApp: +972 59-587-3328"
-                className="latin group inline-flex items-center gap-1.5 rounded-full border border-dusty/30 bg-ivory/5 px-3 py-1 text-xs font-semibold text-ivory transition hover:border-gold hover:bg-ivory/10 hover:text-gold sm:text-sm"
-              >
-                <WhatsAppIcon className="size-3.5 shrink-0 text-emerald-400 transition-transform group-hover:scale-110" />
-                <span>+972 59-587-3328</span>
-              </a>
-            </div>
-
-            <p className="text-xs text-ivory/60">
-              جميع الحقوق محفوظة · {b.name}
-            </p>
-          </div>
+        <div className="container-lux flex flex-col items-center justify-between gap-4 py-6 text-center sm:flex-row sm:text-start">
+          <p className="text-xs text-ivory/60">
+            © 2026 {b.name} · جميع الحقوق محفوظة
+          </p>
           <div className="text-xs text-ivory/60">
             <p>الدفع عند الاستلام · أسعار بالشيكل (₪)</p>
+          </div>
+        </div>
+
+        <div className="border-t border-ivory/10 py-3">
+          <div className="container-lux flex flex-col items-center justify-center gap-1.5 text-center text-[11px] text-ivory/50 sm:flex-row sm:gap-2">
+            <a
+              href="https://www.instagram.com/alaq.ps26"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-gold"
+            >
+              صُنع بإبداع بواسطة أَلَق | <span lang="en" className="latin tracking-wider font-medium">ALAQ</span>
+            </a>
+            <span aria-hidden="true" className="hidden text-ivory/30 sm:inline">·</span>
+            <a
+              href="https://wa.me/970594052256"
+              target="_blank"
+              rel="noreferrer"
+              dir="ltr"
+              aria-label="واتساب +970 594 052 256"
+              className="latin transition-colors hover:text-gold"
+            >
+              +970 594 052 256
+            </a>
           </div>
         </div>
       </div>
