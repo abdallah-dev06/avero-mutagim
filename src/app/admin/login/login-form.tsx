@@ -14,7 +14,7 @@ export function LoginForm() {
           id="identifier"
           name="identifier"
           type="text"
-          placeholder="0599xxxxxx أو admin@vetrina.ps"
+          placeholder="0528982522 أو admin@avero-mutagim.com"
           dir="ltr"
           className="text-right"
           autoComplete="username"

@@ -17,6 +17,6 @@ export async function verifyPassword(hashStr: string, password: string) {
 // Constant-ish work when user does not exist, to avoid user enumeration by timing.
 let dummy: Promise<string> | null = null;
 export async function burnPasswordCheck(password: string) {
-  dummy ??= hash("vetrina-dummy-password", OPTS);
+  dummy ??= hash("avero-dummy-password", OPTS);
   await verifyPassword(await dummy, password);
 }
