@@ -570,17 +570,6 @@ function StepPublish({ s, update, collections, sizeCharts }: StepProps & { colle
         </fieldset>
         <Switch label="منتج مميّز" checked={s.isFeatured} onCheckedChange={(v) => update({ isFeatured: v })} />
         <Switch label="ضمن «الأكثر طلباً»" checked={s.isBestSeller} onCheckedChange={(v) => update({ isBestSeller: v })} />
-        <Field label="جدول المقاسات" htmlFor="chart" hint="اتركيه على «حسب القسم» لاستخدام جدول القسم أو الافتراضي">
-          <Select id="chart" value={s.sizeChartId ?? ""} onChange={(e) => update({ sizeChartId: e.target.value || null })}>
-            <option value="">حسب القسم / الافتراضي</option>
-            {sizeCharts.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-                {c.isDefault ? " (افتراضي)" : ""}
-              </option>
-            ))}
-          </Select>
-        </Field>
         {collections.length > 0 && (
           <fieldset>
             <legend className="mb-2 text-sm font-medium">المجموعات</legend>

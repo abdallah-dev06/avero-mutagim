@@ -11,7 +11,6 @@ import {
   MapPin,
   Menu,
   MessageCircle,
-  Ruler,
   Settings,
   Shirt,
 } from "lucide-react";
@@ -29,7 +28,6 @@ const NAV = [
   { href: "/admin/products", label: "المنتجات", icon: Shirt },
   { href: "/admin/inventory", label: "المخزون", icon: Boxes, badge: "stock" as const },
   { href: "/admin/categories", label: "الأقسام والمجموعات", icon: FolderTree },
-  { href: "/admin/size-charts", label: "دليل المقاسات", icon: Ruler },
   { href: "/admin/delivery", label: "مناطق التوصيل", icon: MapPin },
   { href: "/admin/whatsapp", label: "قوالب واتساب", icon: MessageCircle },
   { href: "/admin/settings", label: "إعدادات الموقع", icon: Settings },

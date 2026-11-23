@@ -106,18 +106,6 @@ export function CategoryList({ kind, items, sizeCharts }: { kind: "category" | "
               <Field label="الوصف" htmlFor="cd">
                 <Textarea id="cd" rows={2} value={edit.description ?? ""} onChange={(e) => setEdit({ ...edit, description: e.target.value })} />
               </Field>
-              {kind === "category" && (
-                <Field label="جدول المقاسات للقسم" htmlFor="cc">
-                  <Select id="cc" value={edit.sizeChartId ?? ""} onChange={(e) => setEdit({ ...edit, sizeChartId: e.target.value || null })}>
-                    <option value="">الافتراضي</option>
-                    {sizeCharts.map((s) => (
-                      <option key={s.id} value={s.id}>
-                        {s.name}
-                      </option>
-                    ))}
-                  </Select>
-                </Field>
-              )}
               <div className="flex items-start gap-3">
                 {edit.imageUrl ? (
                   <div className="relative">
